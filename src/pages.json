@@ -1,9 +1,21 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/HelloWorld",
+			"path": "pages/home",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "402房间预约"
+			}
+		},
+		{
+			"path": "pages/messages",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+		},
+		{
+			"path": "pages/mine",
+			"style": {
+				"navigationBarTitleText": "我的"
 			}
 		}
 	],
@@ -12,5 +24,25 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"selectedColor": "#c8eeff",
+		"list": [
+			{
+				"pagePath": "pages/home",
+				"iconPath": "static/home.png",
+				"selectedIconPath": "static/home_s.png"
+			},
+			{
+				"pagePath": "pages/messages",
+				"iconPath": "static/messages.png",
+				"selectedIconPath": "static/messages_s.png"
+			},
+			{
+				"pagePath": "pages/mine",
+				"iconPath": "static/mine.png",
+				"selectedIconPath": "static/mine_s.png"
+			}
+		]
 	}
 }

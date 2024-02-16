@@ -1,5 +1,5 @@
 {
-    "name" : "project-name",
+    "name" : "zq_room402_frontend",
     "appid" : "project-appid",
     "description" : "project-description",
     "versionName" : "1.0.0",
@@ -7,7 +7,7 @@
     "transformPx" : false,
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "miniprogram-appid",
+        "appid" : "wx387b4176018ddc5d",
         "setting" : {
             "urlCheck" : false
         },
