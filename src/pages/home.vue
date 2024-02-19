@@ -22,87 +22,104 @@
       </swiper>
     </view>
     <view class="blue">
-
+  
     </view>
     <text class="middle">主要功能</text>
     <view class="container">
-      <view id="book">预约房间</view>
-      <view id="cancel">取消预约</view>
-      <view id="problem">故障报修</view>
-      <view id="suggest">意见反馈</view>
+      <view id="book" @click="openPrompt">预约房间</view>
+      <view id="cancel" @click="openPrompt">取消预约</view>
+      <view id="problem" @click="openPrompt">故障报修</view>
+      <view id="suggest" @click="openPrompt">意见反馈</view>
 
     </view>
+  
+    
     <view class="prompt">
       <view>请先登录!</view>
-      <button>确认</button>
+      <button @click="closePrompt">确认</button>
     </view>
+
+    
 
   </view>
 </template>
 
 <script setup>
 
+import { ref } from "vue";
+
+const isDisplay = ref('none')
+
+const openPrompt = () => {
+  isDisplay.value = "block";
+}
+const closePrompt = () => {
+  isDisplay.value = 'none';
+}
+
 
 </script>
 
 <style>
 .content{
-  width: 375px;
+  width: 100vw;
   height: 100vh;
   background-color: #f5f5f5;
 }
 .header{
   position: absolute;
-  left: 2.93%;
-  right: 52%;
-  top: 2.56%;
-/* bottom: 85.59%+10%; */
-
+  left: 22rpx;
+  top: 28rpx;
+  height: 30rpx;
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
-font-size: 12px;
-line-height: 15px;
+font-size: 24rpx;
+line-height: 30rpx;
 text-align: center;
-letter-spacing: -0.3px;
+letter-spacing: -0.6rpx;
 
 color: #979797;
   
 }
 .switch{
   /* position: fixed; */
-  width: 94px;
-  height: 33px;
+  width: 188rpx;
+  height: 66rpx;
   /* top: 3px;
   right:5px; */
   position: absolute;
-  left: 75.2%;
-  right: 1.6%;
-  top: 1.45%;
+  left: 564rpx;
+  top: 10rpx;
 
 }
 .uni-margin-wrap {
 		width: 100%;
     position: absolute;
-    left: 8%;
-    right: 7.47%;
-    top: 8.47%;
+    left: 50%;
+    /* right: 7.47%; */
+    top: 124rpx;
+    transform: translateX(-50%);
     /* bottom: 56.9%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 	}
 	.swiper {
-		height: 200px;
-    width: 317px;
+		height: 400rpx;
+    width: 634rpx;
     overflow: hidden;
     display: flex;
     align-items: center;
-    border-radius: 18px;
+    justify-content: center;
+    border-radius: 36rpx;
 
 	}
 	.swiper-item {
 		display: flex;
-		height: 200px;
-    width: 317px;
+		height: 400rpx;
+    width: 634rpx;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -110,46 +127,41 @@ color: #979797;
 	}
  .blue{
   position: absolute;
-  left: 4.27%;
-  right: 93.33%;
-  top: 43.8%;
+  left: 32rpx;
+  top: 584rpx;
 
 
   background: #0283FA;
-  border-radius: 8px;
-  width: 9px;
-  height: 33px;
+  border-radius: 16rpx;
+  width: 18rpx;
+  height: 66rpx;
 
  }
  .middle{
   /* 主要功能 */
 
 position: absolute;
-left: 9.6%;
-right: 64.27%;
-top: 44.04%;
-bottom: 49.26%;
+left: 72rpx;
+top: 588rpx;
 
 font-family: 'SimHei';
 font-style: normal;
 font-weight: 400;
-font-size: 24px;
-line-height: 27px;
+font-size: 48rpx;
+line-height: 54rpx;
 text-align: center;
-letter-spacing: -0.3px;
+letter-spacing: -0.6rpx;
 
 color: #000000;
 
 
  }
 .container{
-  position: absolute;
-left: 4.53%;
-right: 4.8%;
-top: 50.2%;
-/* bottom: 12.81%; */
-width: 340px;
-height: 276px;
+position: absolute;
+left: 34rpx;
+top: 688rpx;
+width: 680rpx;
+height: 552rpx;
 display: block;
 background: #FFFFFF;
 margin: 0 auto;
@@ -157,21 +169,18 @@ margin: 0 auto;
 }
 .container view{
   position: absolute;
-left: 0%;
-right: 0%;
-top: 0%;
-bottom: 0%;
-width: 146px;
-height: 91px;
+
+width: 292rpx;
+height: 182rpx;
 background: #C8EEFF;
-border-radius: 16px;
+border-radius: 32rpx;
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
-font-size: 24px;
-line-height: 30px;
+font-size: 48rpx;
+line-height: 60rpx;
 text-align: center;
-letter-spacing: -0.3px;
+letter-spacing: -0.6rpx;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -181,24 +190,24 @@ color: #0071D9;
 
 
 position: absolute;
-left: 16px;
-top: 24px;
+left: 32rpx;
+top: 48rpx;
 
 
 
 }
 #cancel{
   position: absolute;
-  left:180px;
-  top: 24px;
+  left:360rpx;
+  top: 48rpx;
 
 }
 #problem{
 
 
   position: absolute;
-  left: 16px;
-  top: 149px;
+  left: 32rpx;
+  top: 298rpx;
 
 
 }
@@ -206,40 +215,39 @@ top: 24px;
 
   position: absolute;
 
-  left: 180px;
-  top: 149px;
+  left: 360rpx;
+  top: 298rpx;
 
 }
 .prompt{
 position: absolute;
 left: 50%; top: 50%;
 transform: translate(-50%, -50%);
-width: 344px;
-height: 362px;
-display: none;
-
+width: 688rpx;
+height: 734rpx;
+display: v-bind(isDisplay);
 background: #FFFBFB;
-border-radius: 32px;
-padding-top: 20px;
+border-radius: 64rpx;
+padding-top: 80rpx;
 }
 .prompt view{
   /* 请先登录！ */
 
 position: absolute;
-left: 59px;
-top: 100px;
-width: 241px;
-height: 61px;
+left: 118rpx;
+top: 200rpx;
+width: 482rpx;
+height: 122rpx;
 
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
-font-size: 48px;
-line-height: 61px;
+font-size: 96rpx;
+line-height: 122rpx;
 /* identical to box height */
 text-align: center;
-letter-spacing: -0.3px;
+letter-spacing: -0.6rpx;
 
 color: #000000;
 margin: 0 auto;
@@ -249,11 +257,11 @@ button{
   /* Component 9 */
 
 position: absolute;
-left: 70px;
-top: 240px;
-width: 204px;
-height: 86px;
-margin: 10px auto;
+left: 140rpx;
+top: 480rpx;
+width: 408rpx;
+height: 172rpx;
+margin: 20rpx auto;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -265,17 +273,17 @@ align-items: center;
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
-font-size: 32px;
-line-height: 41px;
+font-size: 64rpx;
+line-height: 81rpx;
 text-align: center;
-letter-spacing: -0.3px;
+letter-spacing: -0.6rpx;
 
 color: #000000;
 
 
 
 background: rgba(85, 198, 255, 0.6);
-border-radius: 16px;
+border-radius: 32rpx;
 
 
 }

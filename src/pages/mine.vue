@@ -7,19 +7,25 @@
           mode="scaleToFill"
         />
       </view>
+      <navigator
+        url="/pages/logIn"
+        open-type="redirect"
+        hover-class="navigator-hover"
+      >
       <view class="button">注册/登录</view>
+      </navigator>
     </view>
   </view>
 </template>
 
-<script>
+<script setup>
 
 </script>
 
 <style scoped>
 .bg{
   height: 100vh;
-  width: 375px;
+  width: 100vw;
   background-color: #f5f5f5;
 }
 .white{

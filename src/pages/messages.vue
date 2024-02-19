@@ -1,15 +1,22 @@
+<script setup>
+import { ref } from "vue";
+const isDisplay = ref('block') ;
+const closePrompt = () => {
+  isDisplay.value='none'
+}
+</script>
+
+
 <template>
   <view class="bg">
     <view class="prompt">
       <view>请先登录!</view>
-      <button>确认</button>
+      <button @click="closePrompt">确认</button>
     </view>
 
   </view>
 </template>
 
-<script>
-</script>
 
 <style scoped>
 .bg{
@@ -23,7 +30,7 @@ left: 50%; top: 50%;
 transform: translate(-50%, -50%);
 width: 344px;
 height: 362px;
-
+display: v-bind(isDisplay);
 
 background: #FFFBFB;
 border-radius: 32px;
