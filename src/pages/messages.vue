@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from "vue";
 const isDisplay = ref('block') ;
+let flag = 1;
+if(flag === 1){
+  isDisplay.value = 'none'
+}
 const closePrompt = () => {
   isDisplay.value='none'
 }

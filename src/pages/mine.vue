@@ -9,7 +9,7 @@
       </view>
       <navigator
         url="/pages/logIn"
-        open-type="redirect"
+        open-type="navigate"
         hover-class="navigator-hover"
       >
       <view class="button">注册/登录</view>

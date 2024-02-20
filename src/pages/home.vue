@@ -1,3 +1,56 @@
+<script setup>
+
+import { ref } from "vue";
+
+let flag = 1;
+
+
+const isDisplay = ref('none')
+
+const open1 = () => {
+  if(flag===0){
+    isDisplay.value = "block";
+  }else{
+    uni.navigateTo({
+    url:'/pages/book',
+  })
+  }
+}
+const open2 = () => {
+  if(flag===0){
+    isDisplay.value = "block";
+  }else{
+    uni.navigateTo({
+    url:'/pages/cancel',
+  })
+  }
+}
+const open3 = () => {
+  if(flag===0){
+    isDisplay.value = "block";
+  }else{
+    uni.navigateTo({
+    url:'/pages/problem',
+  })
+  }
+}
+const open4 = () => {
+  if(flag===0){
+    isDisplay.value = "block";
+  }else{
+    uni.navigateTo({
+    url:'/pages/suggest',
+  })
+  }
+}
+const closePrompt = () => {
+  isDisplay.value = 'none';
+}
+
+
+</script>
+
+
 <template>
   <view class="content">
     
@@ -26,10 +79,10 @@
     </view>
     <text class="middle">主要功能</text>
     <view class="container">
-      <view id="book" @click="openPrompt">预约房间</view>
-      <view id="cancel" @click="openPrompt">取消预约</view>
-      <view id="problem" @click="openPrompt">故障报修</view>
-      <view id="suggest" @click="openPrompt">意见反馈</view>
+      <view id="book" @click="open1">预约房间</view>
+      <view id="cancel" @click="open2">取消预约</view>
+      <view id="problem" @click="open3">故障报修</view>
+      <view id="suggest" @click="open4">意见反馈</view>
 
     </view>
   
@@ -44,23 +97,9 @@
   </view>
 </template>
 
-<script setup>
-
-import { ref } from "vue";
-
-const isDisplay = ref('none')
-
-const openPrompt = () => {
-  isDisplay.value = "block";
-}
-const closePrompt = () => {
-  isDisplay.value = 'none';
-}
 
 
-</script>
-
-<style>
+<style scoped>
 .content{
   width: 100vw;
   height: 100vh;

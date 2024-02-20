@@ -8,7 +8,7 @@
     <text>请选择您的角色</text>
     <navigator
       url="/pages/completeInfor"
-      open-type="redirect"
+      open-type="navigate"
       hover-class="navigator-hover"
     >
       <button class="student"><image
@@ -17,7 +17,7 @@
       /></button>
       <navigator
         url="/pages/"
-        open-type="redirect"
+        open-type="navigate"
         hover-class="navigator-hover"
       >
         <button class="manager">

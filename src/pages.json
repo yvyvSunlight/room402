@@ -42,6 +42,30 @@
 			"style": {
 				"navigationBarTitleText": "完善个人信息"
 			}
+		},
+		{
+			"path": "pages/book",
+			"style": {
+				"navigationBarTitleText": "book"
+			}
+		},
+		{
+			"path": "pages/cancel",
+			"style": {
+				"navigationBarTitleText": "cancel"
+			}
+		},
+		{
+			"path": "pages/problem",
+			"style": {
+				"navigationBarTitleText": "problem"
+			}
+		},
+		{
+			"path": "pages/suggest",
+			"style": {
+				"navigationBarTitleText": "suggest"
+			}
 		}
 	],
 	"globalStyle": {

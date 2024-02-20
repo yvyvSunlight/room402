@@ -10,7 +10,7 @@
     <text class="content">注册成功！</text>
     <navigator
       url="/pages/choose"
-      open-type="redirect"
+      open-type="navigate"
       hover-class="navigator-hover"
     >
     <button class="jump">登录</button>
