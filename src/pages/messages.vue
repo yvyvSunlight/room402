@@ -1,8 +1,8 @@
 <script setup>
+import helper from "../../common/helper.js";
 import { ref } from "vue";
 const isDisplay = ref('block') ;
-let flag = 1;
-if(flag === 1){
+if(helper.isUser === 1){
   isDisplay.value = 'none'
 }
 const closePrompt = () => {

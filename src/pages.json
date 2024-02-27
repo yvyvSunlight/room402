@@ -46,25 +46,25 @@
 		{
 			"path": "pages/book",
 			"style": {
-				"navigationBarTitleText": "book"
+				"navigationBarTitleText": "预约会议"
 			}
 		},
 		{
 			"path": "pages/cancel",
 			"style": {
-				"navigationBarTitleText": "cancel"
+				"navigationBarTitleText": "我的会议"
 			}
 		},
 		{
 			"path": "pages/problem",
 			"style": {
-				"navigationBarTitleText": "problem"
+				"navigationBarTitleText": "故障报修"
 			}
 		},
 		{
 			"path": "pages/suggest",
 			"style": {
-				"navigationBarTitleText": "suggest"
+				"navigationBarTitleText": "意见反馈"
 			}
 		}
 	],

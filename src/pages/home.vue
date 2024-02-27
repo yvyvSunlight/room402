@@ -1,14 +1,12 @@
 <script setup>
-
+import helper from '../../common/helper.js';
 import { ref } from "vue";
-
-let flag = 1;
 
 
 const isDisplay = ref('none')
 
 const open1 = () => {
-  if(flag===0){
+  if(helper.isUser===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -17,7 +15,7 @@ const open1 = () => {
   }
 }
 const open2 = () => {
-  if(flag===0){
+  if(helper.isUser===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -26,7 +24,7 @@ const open2 = () => {
   }
 }
 const open3 = () => {
-  if(flag===0){
+  if(helper.isUser===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -35,7 +33,7 @@ const open3 = () => {
   }
 }
 const open4 = () => {
-  if(flag===0){
+  if(helper.isUser===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -61,7 +59,7 @@ const closePrompt = () => {
       class="switch"
     />
     <view class="uni-margin-wrap">
-      <swiper class="swiper" circular :indicator-dots="true" :autoplay="true" :interval="2000"
+      <swiper class="swiper" circular :indicator-dots="false" :autoplay="true" :interval="2000"
       :duration="500">
           <swiper-item>
               <view class="swiper-item uni-bg-red">公告A</view>

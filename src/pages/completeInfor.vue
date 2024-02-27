@@ -1,8 +1,10 @@
 <script setup>
+  import helper from '../../common/helper.js';
   const goHome = () => {
     uni.switchTab({
     url:"/pages/home"
   })
+   helper.isUser = 1;
   }
 </script>
 <template>
