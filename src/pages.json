@@ -66,6 +66,12 @@
 			"style": {
 				"navigationBarTitleText": "意见反馈"
 			}
+		},
+		{
+			"path": "pages/aboutUs",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
 		}
 	],
 	"globalStyle": {

@@ -17,6 +17,12 @@ const goLogin = () => {
   }
 }
 
+const go_aboutUs = () => {
+  uni.navigateTo({
+    url:'/pages/aboutUs'
+  })
+}
+
 </script>
 
 <template>
@@ -73,7 +79,7 @@ const goLogin = () => {
         </view>
         <view class="bar" id="bar_4">
           <text>关于我们</text>
-          <view class="key_box">
+          <view class="key_box" @click="go_aboutUs">
             <image
               src="../static/key.svg"
               mode="scaleToFill"

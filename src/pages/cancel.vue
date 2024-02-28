@@ -1,9 +1,15 @@
-<template>
-  <div class="cancel">cancel</div>
-</template>
-
-<script lang="ts">
+<script setup>
 
 </script>
+
+
+<template>
+  <view class="bg">
+
+
+    
+  </view>
+</template>
+
 
 <style scoped></style>

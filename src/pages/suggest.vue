@@ -1,5 +1,13 @@
 <script setup>
-
+  import { ref } from "vue";
+  const isDisplay = ref('none');
+  const f_prompt = () => {
+    isDisplay.value = 'block';
+    setTimeout( () => {
+      uni.switchTab({ url: '/pages/home' });
+      isDisplay.value = 'none'
+    },1000)
+  }
 </script>
 
 <template>
@@ -9,9 +17,13 @@
     <view class="describe_box">
       <textarea name="describe" id="descibe" cols="30" rows="10" placeholder="请输入使用意见反馈"></textarea>
     </view>
-    <button class="submit">提交</button>
+    <button class="submit" @click="f_prompt">提交</button>
 
-
+    <view class="prompt">
+      <text class="prompt_">
+        感谢您提出宝贵建议！
+      </text>
+    </view>
 
 
   </view>
@@ -137,4 +149,41 @@ flex-grow: 0;
   
 }
 
+
+
+.prompt{
+position: absolute;
+width: 688rpx;
+height: 724rpx;
+left: 50%;
+top: 274rpx;
+transform: translateX(-50%);
+
+background: #FFFBFB;
+border-radius: 64rpx;
+display: v-bind(isDisplay);
+
+}
+.prompt_{
+
+position: absolute;
+width: 482rpx;
+height: 122rpx;
+left: 118rpx;
+top: 200rpx;
+
+font-family: 'Microsoft YaHei UI';
+font-style: normal;
+font-weight: 400;
+font-size: 96rpx;
+line-height: 122rpx;
+/* identical to box height */
+text-align: center;
+letter-spacing: -0.6rpx;
+
+color: #000000;
+
+
+
+}
 </style>
