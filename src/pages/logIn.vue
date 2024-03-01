@@ -1,3 +1,12 @@
+<script setup>
+  import { ref } from "vue";
+  const isDisplay = ref('none')
+  const wx_suc = () => {
+    isDisplay.value = 'block';
+  }
+</script>
+
+
 <template>
   <div class="bg">
     <input type="text" placeholder="账号">
@@ -6,6 +15,7 @@
   <button class="submit">登录</button>
   <text class="middle">或一键授权微信注册/登录</text>
   <button class="weixin" @click="wx_suc">微信一键注册/登录</button>
+
   <view class="prompt_suc">
     <text class="content">注册成功！</text>
     <navigator
@@ -16,11 +26,9 @@
     <button class="jump">登录</button>
     </navigator>
   </view>
+
 </template>
 
-<script>
-
-</script>
 
 <style scoped>
 .bg{
@@ -154,15 +162,16 @@ color: #F6F1FB;
 
   /* Rectangle 31 */
 
-position: absolute;
+  position: absolute;
 
-left: 50%;
-top: 50%;
-transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 
-background: #FFFBFB;
-border-radius: 64rpx;
+  background: #FFFBFB;
+  border-radius: 64rpx;
 
+ display: v-bind(isDisplay);
 }
 .content{
 /* 注册成功！ */

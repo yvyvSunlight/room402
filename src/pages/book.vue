@@ -1,15 +1,51 @@
-<script setup>
+<script setup lang="ts">
   import {ref} from 'vue';
   const day = ref(1)
   const month = ref(1)
   const year = ref(2024)
+  const select_date_display = ref('none')
+  const select_reminder_diplay = ref('none')
+  const f_select_reminder = () => {
+    select_reminder_diplay.value = 'block';
+  }
+  const remind_input = ref('提前5分钟提醒')
+  const f_remind_input_5 = () => {
+    remind_input.value = '提前5分钟提醒'
+  }
+  const f_remind_input_15 = () => {
+    remind_input.value = '提前15分钟提醒'
+  }
+  const f_remind_input_30 = () => {
+    remind_input.value = '提前30分钟提醒'
+  }
+  const f_remind_input_60 = () => {
+    remind_input.value = '提前一小时提醒'
+  }
+  let leap = 0;
+  if(year.value%4 === 0 && year.value%100 != 0 || year.value%400 === 0){
+    leap = 1;
+  }else{
+    leap = 0;
+  }
+
   const upDay = () => {
     switch(month.value){
       case 2:
         if(leap){
-          day.value = (day.value + 1 + day.value/29) % 30 ;
+          // day.value = (day.value + 1 + parseInt(day.value/29)) % 30 ;
+          if(day.value === 29){
+            day.value = 1
+          }else{
+            day.value ++;
+          }
+
         }else{
-          day.value = (day.value + 1 + day.value/28) % 29 ;
+          // day.value = (day.value + 1 + parseInt(day.value/28)) % 29 ;
+          if(day.value === 28){
+            day.value = 1;
+          }else{
+            day.value ++;
+          }
         }
         break;
       case 1:
@@ -19,10 +55,20 @@
       case 8:
       case 10:
       case 12:
-        day.value = (day.value + 1) % 32 + day.value / 31;
+        // day.value = (day.value + 1) % 32 + parseInt(day.value / 31);
+        if(day.value === 31){
+          day.value = 1;
+        }else{
+          day.value++;
+        }
         break;
       default:
-        day.value = (day.value + 1) % 31 + day.value / 30;
+        // day.value = (day.value + 1) % 31 + parseInt(day.value / 30);
+        if(day.value === 30){
+          day.value = 1;
+        }else{
+          day.value++;
+        }
         break;
     }
   }
@@ -30,9 +76,19 @@
     switch(month.value){
       case 2:
         if(leap){
-          day.value = (day.value - 1 - 1/day.value) % 30;
+          // day.value = (day.value - 1 - parseInt(1/day.value)) % 30;
+          if(day.value === 1){
+            day.value = 29;
+          }else{
+            day.value --;
+          }
         }else{
-          day.value = (day.value - 1 - 1/day.value) % 29 ;
+          // day.value = (day.value - 1 - parseInt(1/day.value)) % 29 ;
+          if(day.value === 1){
+            day.value = 28;
+          }else{
+            day.value--;
+          }
         }
         break;
       case 1:
@@ -42,27 +98,58 @@
       case 8:
       case 10:
       case 12:
-        day.value = (day.value - 1 -1/day.value) % 31;
+        // day.value = (day.value - 1 -parseInt(1/day.value)) % 31;
+        if(day.value === 1){
+          day.value = 31;
+        }else{
+          day.value--;
+        }
         break;
       default:
-        day.value = (day.value - 1 -1/day.value) %30;
+        // day.value = (day.value - 1 -parseInt(1/day.value)) %30;
+        if(day.value === 1){
+          day.value = 30;
+        }else{
+          day.value--;
+        }
         break;
     }
   }
-  const onMonth = () => {
-    month.value = (month.value + 1 + month/12) % 13;
-  }
-  const downMonth = () => {
-    month.value = (month.value - 1 - 1/month) % 13;
-  }
-  const onYear = () => {
-    year.value ++;
-  }
-  const downYear = () => {
-    if(year > 2024){
-      year.value --;
+
+
+
+  const upMonth = () => {
+    // month.value = (month.value + 1 + parseInt(month/12)) % 13;
+    if(month.value === 12){
+      month.value = 1;
+    }else{
+      month.value++;
     }
   }
+
+
+
+  const downMonth = () => {
+    // month.value = (month.value - 1 - parseInt(1/month)) % 13;
+    if(month.value === 1){
+      month.value = 12;
+    }else{
+      month.value--;
+    }
+  }
+
+
+
+  const upYear = () => {
+    year.value = year.value+1;
+  }
+
+  const downYear = () => {
+    // if(year > 2024){
+      year.value = year.value-1;
+    // }
+  }
+
   const time0_ = ref('9:00');
 
 
@@ -76,7 +163,13 @@
     },1000)
   }
 
-
+  const f_select_date = () => {
+    select_date_display.value = 'block';
+  }
+  const f_clear = () => {
+    select_date_display.value = 'none';
+    select_reminder_diplay.value = 'none';
+  }
 </script>
 
 
@@ -85,10 +178,12 @@
     <text class="theme">会议主题</text>
     <input type="text" class="describe">
     <view class="lineup"></view>
+
+
     <view class="date_v">
       <text class="date">日期</text>
-      <text class="date_">{{month}}/{{day}}/{{year}}</text>
-      <view class="key_but">
+      <text class="date_">{{ month }}/{{ day }}/{{ year }}</text>
+      <view class="key_but" @click="f_select_date">
         <image
         src="../static/key.svg"
         mode="scaleToFill"
@@ -97,9 +192,64 @@
       />
       </view>
     </view>
+
+
+    <view class="helper_area" @click="f_clear"></view>
+
+    <view class="select_date_box">
+      <view class="select_date_year">{{ year }}</view>
+      <view class="select_date_month">{{ month }}</view>
+      <view class="select_date_day">{{ day }}</view>
+
+      <view class="up_arrow" id="upYear" @click="downYear">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+      <view class="up_arrow" id="upMonth" @click="downMonth">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+      <view class="up_arrow" id="upDay" @click="downDay">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+
+      <view class="down_arrow" id="downYear" @click="upYear">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+      <view class="down_arrow" id="downMonth" @click="upMonth">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+      <view class="down_arrow" id="downDay" @click="upDay">
+        <image
+          src="../static/key.svg"
+          mode="scaleToFill"
+        />
+      </view>
+
+
+    </view>
+
+
+
+
+
+
     <view class="time0_v">
       <text class="time0">开始时间</text>
-      <text class="time0_">{{time0_}}</text>
+      <text class="time0_">{{ time0_ }}</text>
       <view class="key_but">
         <image
         src="../static/key.svg"
@@ -126,8 +276,8 @@
     <text class="options">会议选项</text>
     <view class="remind_v">
       <text class="remind">会议提醒</text>
-      <text class="remind_">提前5分钟提醒</text>
-      <view class="key_but">
+      <text class="remind_">{{ remind_input }}</text>
+      <view class="key_but" @click="f_select_reminder">
         <image
         src="../static/key.svg"
         mode="scaleToFill"
@@ -135,6 +285,12 @@
         id="key_4"
       />
       </view>
+    </view>
+    <view class="select_reminder_box">
+      <view class="reminder_option" @click="f_remind_input_5">提前5分钟提醒</view>
+      <view class="reminder_option" @click="f_remind_input_15">提前15分钟提醒</view>
+      <view class="reminder_option" @click="f_remind_input_30">提前30分钟提醒</view>
+      <view class="reminder_option" @click="f_remind_input_60">提前一小时提醒</view>
     </view>
     <text class="place">
       会议地点
@@ -356,6 +512,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 
+z-index: 1;
+
 }
 
 
@@ -477,7 +635,7 @@ top: 630rpx;
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 500;
-font-size: 22rpx;
+font-size: 24rpx;
 line-height: 140%;
 /* or 25px */
 letter-spacing: 0.4rpx;
@@ -593,6 +751,134 @@ text-shadow: 8rpx 16rpx 48rpx rgba(36, 107, 253, 0.25);
 flex: none;
 order: 0;
 flex-grow: 0;
+
+}
+
+
+
+
+.select_date_box{
+  /* Frame 9 */
+
+position: absolute;
+top: calc((193)*2rpx);
+left:calc((311 - 295)*2rpx);
+width: calc(295*2rpx);
+height: calc(146*2rpx);
+
+background: #FFFFFF;
+box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
+border-radius: 20rpx;
+z-index: 2;
+display: v-bind(select_date_display);
+overflow: hidden;
+}
+.select_date_year,.select_date_month,.select_date_day{
+  /* Rectangle 996 */
+
+position: absolute;
+width: 132rpx;
+height: 106rpx;
+top: 84rpx;
+
+
+background: #FFFFFF;
+box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.select_date_year{
+  left: 40rpx;
+}
+.select_date_month{
+  left: 230rpx;
+}
+.select_date_day{
+  left: 420rpx;
+}
+
+
+
+.up_arrow,.down_arrow{
+
+position: absolute;
+width: 40rpx;
+height: 40rpx;
+overflow: hidden;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.up_arrow{
+  top: 42rpx;
+transform: rotate(-90deg);
+
+}
+.down_arrow{
+  top: 220rpx;
+  transform: rotate(90deg);
+}
+#upYear,#downYear{
+left: 86rpx;
+overflow: hidden;
+}
+#upMonth,#downMonth{
+  left: calc(138*2rpx);
+}
+#upDay,#downDay{
+  left: 460rpx;
+  overflow: hidden;
+}
+
+.helper_area{
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.select_reminder_box{
+  overflow: hidden;
+  position: absolute;
+  height: calc(172*2rpx);
+  width: 468rpx;
+  top: 814rpx;
+  left: calc((312 - 234)*2rpx);
+  z-index: 2;
+
+  display: v-bind(select_reminder_diplay);
+
+background: #FFFFFF;
+box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
+
+}
+.reminder_option{
+  width: 468rpx;
+  height: 86rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 600;
+font-size: 32rpx;
+line-height: 140%;
+/* or 22px */
+
+letter-spacing: 0.4rpx;
+
+color: #000000;
+
 
 }
 </style>
