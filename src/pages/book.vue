@@ -1,8 +1,285 @@
-<script setup lang="ts">
-  import {ref} from 'vue';
-  const day = ref(1)
-  const month = ref(1)
-  const year = ref(2024)
+<script setup>
+  import { onReady } from '@dcloudio/uni-app';
+  import {onMounted, ref} from 'vue';
+  import { getCurrentInstance } from "vue";
+  // import { createSSRApp } from "vue";
+  // let vm = createSSRApp(App)({
+  //   el:'#app',
+  //   method:{
+
+  //     f_s_t : function(e,p){
+  //      console.log(p);
+  //    }
+
+  //   }
+  // })
+  // new Vue 
+
+  let date = new Date();
+  let current_y = date.getFullYear();
+  let current_m = date.getMonth() + 1;
+  let current_d = date.getDate();
+  
+  let pt = -1
+  const scroll_tab_top = ref('450rpx')
+  const tab_disp = ref('none')
+  const d_0 = ref('block')
+  const d_1 = ref('block')
+  const d_2 = ref('block')
+  const d_3 = ref('block')
+  const d_4 = ref('block')
+  const d_5 = ref('block')
+  const d_6 = ref('block')
+  const d_7 = ref('block')
+  const d_8 = ref('block')
+  const d_9 = ref('block')
+  const d_10 = ref('block')
+  const d_11 = ref('block')
+  const d_12 = ref('block')
+  const d_13 = ref('block')
+  const d_14 = ref('block')
+  const d_15 = ref('block')
+  const d_16 = ref('block')
+  const d_17 = ref('block')
+  const d_18 = ref('block')
+  const d_19 = ref('block')
+  const d_20 = ref('block')
+  const d_21 = ref('block')
+  let flag = 0;
+
+  const time0_ = ref('9:00');
+  const time1_ = ref('10:30');
+  let dataSet = [d_0,d_1,d_2,d_3];
+
+  const f_select_time = (e,p) => {
+    f_clear();
+    console.log(e);
+    console.log(p);
+    pt = p;
+    if(flag === 0){
+      switch(p){
+        case 0:
+          time0_.value = '9:00'
+          break;
+        case 1:
+          time0_.value = '9:30'
+          break;
+        case 2:
+          time0_.value = '10:00'
+          break;
+        case 3:
+          time0_.value = '10:30'
+          break;
+        case 4:
+          time0_.value = '11:00'
+          break;
+        case 5:
+          time0_.value = '11:30'
+          break;
+        case 6:
+          time0_.value = '12:00'
+          break;
+        case 7:
+          time0_.value = '12:30'
+          break;
+        case 8:
+          time0_.value = '13:00'
+          break;
+        case 9:
+          time0_.value = '13:30'
+          break;
+        case 10:
+          time0_.value = '14:00'
+          break;
+        case 11:
+          time0_.value = '14:30'
+          break;
+        case 12:
+          time0_.value = '15:00'
+          break;
+        case 13:
+          time0_.value = '15:30'
+          break;
+        case 14:
+          time0_.value = '16:00'
+          break;
+        case 15:
+          time0_.value = '16:30'
+          break;
+        case 16:
+          time0_.value = '17:00'
+          break;
+        case 17:
+          time0_.value = '17:30'
+          break;
+        case 18:
+          time0_.value = '18:00'
+          break;
+        case 19:
+          time0_.value = '18:30'
+          break;
+        case 20:
+          time0_.value = '19:00'
+          break;
+        case 21:
+          time0_.value = '19:30'
+          break;
+        case 22:
+          time0_.value = '20:00'
+          break;
+        case 23:
+          time0_.value = '20:30'
+          break;
+        case 24:
+          time0_.value = '21:00'
+          break;
+        case 25:
+          time0_.value = '21:30'
+          break;
+        default:
+          time0_.value = '9:00'
+          break;
+      }
+    }else{
+      switch(p){
+        case 0:
+          time1_.value = '9:00'
+          break;
+        case 1:
+          time1_.value = '9:30'
+          break;
+        case 2:
+          time1_.value = '10:00'
+          break;
+        case 3:
+          time1_.value = '10:30'
+          break;
+        case 4:
+          time1_.value = '11:00'
+          break;
+        case 5:
+          time1_.value = '11:30'
+          break;
+        case 6:
+          time1_.value = '12:00'
+          break;
+        case 7:
+          time1_.value = '12:30'
+          break;
+        case 8:
+          time1_.value = '13:00'
+          break;
+        case 9:
+          time1_.value = '13:30'
+          break;
+        case 10:
+          time1_.value = '14:00'
+          break;
+        case 11:
+          time1_.value = '14:30'
+          break;
+        case 12:
+          time1_.value = '15:00'
+          break;
+        case 13:
+          time1_.value = '15:30'
+          break;
+        case 14:
+          time1_.value = '16:00'
+          break;
+        case 15:
+          time1_.value = '16:30'
+          break;
+        case 16:
+          time1_.value = '17:00'
+          break;
+        case 17:
+          time1_.value = '17:30'
+          break;
+        case 18:
+          time1_.value = '18:00'
+          break;
+        case 19:
+          time1_.value = '18:30'
+          break;
+        case 20:
+          time1_.value = '19:00'
+          break;
+        case 21:
+          time1_.value = '19:30'
+          break;
+        case 22:
+          time1_.value = '20:00'
+          break;
+        case 23:
+          time1_.value = '20:30'
+          break;
+        case 24:
+          time1_.value = '21:00'
+          break;
+        case 25:
+          time1_.value = '21:30'
+          break;
+        default:
+          time1_.value = '9:00'
+          break;
+      }
+    }
+
+  }
+
+  // const f_2 = () => {
+  //   f_clear();
+  //   for(let i = 1;i >= 0 ;i--){
+  //     dataSet[i].value = 'none'
+  //   }
+  // }
+
+  dataSet[1].value = 'none'
+  console.log(dataSet);
+  const f_start_time = () => {
+    // for(let i = 0; i <= pt; i++){
+    // dataSet[i].value = 'block'
+    // }
+    scroll_tab_top.value = '450rpx'
+    tab_disp.value = 'block'
+    // pt = -1;
+    // console.log(dataSet);
+    flag = 0;
+  }
+  const f_end_time = () => {
+    // console.log(pt);
+    // for(let i = pt; i >= 0; i--){
+    //   dataSet[i].value = 'none';
+    //   console.log('test');
+    // }
+    scroll_tab_top.value = 'calc((242 + 25)*2rpx)'
+    tab_disp.value = 'block';
+    // console.log(dataSet[1].value);
+    flag = 1;
+  }
+
+  // onMounted(() => {
+  //   const instance = getCurrentInstance();
+  //   const query = uni.createSelectorQuery().in(instance);
+  
+  //   query
+  //       .selectAll(".scroll-item")
+  //       .boundingClientRect((data) => {
+  //         console.log(data);
+  //         console.log(data[0]);
+  //         data[0].display = 'none';
+  //         console.log(data[0].display);
+          
+          
+  //       })
+  //       .exec();
+  // });
+
+
+  const day = ref(current_d)
+  const month = ref(current_m)
+  const year = ref(current_y)
   const select_date_display = ref('none')
   const select_reminder_diplay = ref('none')
   const f_select_reminder = () => {
@@ -11,17 +288,23 @@
   const remind_input = ref('提前5分钟提醒')
   const f_remind_input_5 = () => {
     remind_input.value = '提前5分钟提醒'
+    f_clear();
   }
   const f_remind_input_15 = () => {
     remind_input.value = '提前15分钟提醒'
+    f_clear();
   }
   const f_remind_input_30 = () => {
     remind_input.value = '提前30分钟提醒'
+    f_clear();
   }
   const f_remind_input_60 = () => {
     remind_input.value = '提前一小时提醒'
+    f_clear();
   }
   let leap = 0;
+
+
   if(year.value%4 === 0 && year.value%100 != 0 || year.value%400 === 0){
     leap = 1;
   }else{
@@ -150,13 +433,32 @@
     // }
   }
 
-  const time0_ = ref('9:00');
+  
 
 
   const isDisplay = ref('none');
 
   const f_prompt = () => {
     isDisplay.value = 'block';
+    uni.request({
+      url:'http://127.0.0.1:4523/m1/4123855-0-default/reservation/',
+      method:'POST',
+      data:{
+        date:`${year}-${month}-${day}`,
+        user_id:`1`,
+        object:
+        {
+          start_time:`${time0_}`,
+          end_time:`${time1_}`
+        }
+      },
+      success:(res)=>{
+        console.log(res.data);
+      },
+      fail:(fail)=>{
+        console.log(fail.data);
+      },
+    })
     setTimeout( () => {
       uni.switchTab({ url: '/pages/home' });
       isDisplay.value = 'none'
@@ -165,11 +467,14 @@
 
   const f_select_date = () => {
     select_date_display.value = 'block';
+    tab_disp.value = 'none'
   }
   const f_clear = () => {
     select_date_display.value = 'none';
     select_reminder_diplay.value = 'none';
+    tab_disp.value = 'none';
   }
+  console.log(tab_disp.value);
 </script>
 
 
@@ -249,8 +554,8 @@
 
     <view class="time0_v">
       <text class="time0">开始时间</text>
-      <text class="time0_">{{ time0_ }}</text>
-      <view class="key_but">
+      <view class="time0_">{{ time0_ }}</view>
+      <view class="key_but" @click="f_start_time">
         <image
         src="../static/key.svg"
         mode="scaleToFill"
@@ -261,8 +566,8 @@
     </view>
     <view class="time1_v">
       <text class="time1">结束时间</text>
-      <text class="time1_">10:30</text>
-      <view class="key_but">
+      <view class="time1_">{{ time1_ }}</view>
+      <view class="key_but" @click="f_end_time">
         <image
         src="../static/key.svg"
         mode="scaleToFill"
@@ -309,12 +614,77 @@
       </text>
     </view>
 
+    <scroll-view scroll-y class="scroll-tab" :display="tab_disp">
+      <view class="scroll-item" @click="f_select_time($event,0)">9:00</view>
+      <view class="scroll-item" @click="f_select_time($event,1)">9:30</view>
+      <view class="scroll-item" @click="f_select_time($event,2)">10:00</view>
+      <view class="scroll-item" @click="f_select_time($event,3)">10:30</view>
+      <view class="scroll-item" @click="f_select_time($event,4)">11:00</view>
+      <view class="scroll-item" @click="f_select_time($event,5)">11:30</view>
+      <view class="scroll-item" @click="f_select_time($event,6)">12:00</view>
+      <view class="scroll-item" @click="f_select_time($event,7)">12:30</view>
+      <view class="scroll-item" @click="f_select_time($event,8)">13:00</view>
+      <view class="scroll-item" @click="f_select_time($event,9)">13:30</view>
+      <view class="scroll-item" @click="f_select_time($event,10)">14:00</view>
+      <view class="scroll-item" @click="f_select_time($event,11)">14:30</view>
+      <view class="scroll-item" @click="f_select_time($event,12)">15:00</view>
+      <view class="scroll-item" @click="f_select_time($event,13)">15:30</view>
+      <view class="scroll-item" @click="f_select_time($event,14)">16:00</view>
+      <view class="scroll-item" @click="f_select_time($event,15)">16:30</view>
+      <view class="scroll-item" @click="f_select_time($event,16)">17:00</view>
+      <view class="scroll-item" @click="f_select_time($event,17)">17:30</view>
+      <view class="scroll-item" @click="f_select_time($event,18)">18:00</view>
+      <view class="scroll-item" @click="f_select_time($event,19)">18:30</view>
+      <view class="scroll-item" @click="f_select_time($event,20)">19:00</view>
+      <view class="scroll-item" @click="f_select_time($event,21)">19:30</view>
+      <view class="scroll-item" @click="f_select_time($event,22)">20:00</view>
+      <view class="scroll-item" @click="f_select_time($event,23)">20:30</view>
+      <view class="scroll-item" @click="f_select_time($event,24)">21:00</view>
+      <view class="scroll-item" @click="f_select_time($event,25)">21:30</view>
+    </scroll-view>
 
   </view>
 </template>
 
 
 <style scoped>
+.scroll-tab{
+  overflow: hidden;
+  width: 180rpx;
+  height: 360rpx;
+  z-index: 3;
+  background-color: #fff;
+  position: absolute;
+  left:calc((312 - 90)*2rpx);
+  top: v-bind(scroll_tab_top);
+  overflow-y: scroll;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: v-bind(tab_disp);
+}
+.scroll-item{
+  width: 180rpx;
+  height: 72rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32rpx;
+  line-height: 140%;
+
+  letter-spacing: 0.4rpx;
+
+  color: #000000;
+
+  background-color: #fff;
+
+}
+
+
+
 .layout{
   width: auto;
   height: auto;
@@ -361,7 +731,7 @@ align-items: center;
 padding: 0px 40rpx;
 gap: 24rpx;
 
-width: 624rpx;
+width: 544rpx;
 height: 112rpx;
 
 /* Greyscale / 50 */
@@ -512,7 +882,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 
-z-index: 1;
+z-index: 2;
 
 }
 
@@ -537,6 +907,13 @@ order: 3;
 align-self: stretch;
 flex-grow: 0;
 
+}
+.time0_,.time1_,.date_{
+  position: absolute;
+  left: 360rpx;
+  width: 200rpx;
+  text-align: right;
+  overflow: hidden;
 }
 .time0_v{
   position: absolute;
@@ -595,7 +972,9 @@ flex-grow: 1;
 
 
 }
-
+.time0_,.time1_{
+  white-space: nowrap;
+}
 .options{
   /* 会议选项 */
 
@@ -730,7 +1109,7 @@ box-shadow: 8rpx 16rpx 48rpx rgba(36, 107, 253, 0.25);
 border-radius: 200rpx;
 
 
-
+z-index: 2;
 
 
 font-family: 'Urbanist';
@@ -769,7 +1148,7 @@ height: calc(146*2rpx);
 background: #FFFFFF;
 box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
 border-radius: 20rpx;
-z-index: 2;
+z-index: 3;
 display: v-bind(select_date_display);
 overflow: hidden;
 }
@@ -841,6 +1220,7 @@ overflow: hidden;
   left:0;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
 }
 
 .select_reminder_box{
@@ -850,7 +1230,7 @@ overflow: hidden;
   width: 468rpx;
   top: 814rpx;
   left: calc((312 - 234)*2rpx);
-  z-index: 2;
+  z-index: 3;
 
   display: v-bind(select_reminder_diplay);
 

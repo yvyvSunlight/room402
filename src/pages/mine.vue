@@ -1,18 +1,27 @@
 <script setup>
 import { onShow } from "@dcloudio/uni-app";
+import  useIsLoginStore  from '@/stores/isLogin';
+import  useRoleStore  from '@/stores/role';
 import helper from "../../common/helper.js";
 import { ref } from "vue";
+const isLoginStore = useIsLoginStore();
+const roleStore = useRoleStore();
 const isDisplay = ref('block');
+
+
 onShow(() => {
-  if(helper.isUser === 1){
+  if(isLoginStore.data == 1){
     isDisplay.value = 'none';
-  } 
+  }
 }) 
 const preLogin = () => {
-  isDisplay.value = 'block';
+  // isDisplay.value = 'block';
+  uni.navigateTo({
+    url:'/pages/logIn'
+  })
 }
 const goLogin = () => {
-  if(helper.isUser === 1){
+  if(isLoginStore.data == 1){
     isDisplay.value = 'none'
   }
 }
@@ -22,7 +31,12 @@ const go_aboutUs = () => {
     url:'/pages/aboutUs'
   })
 }
-
+const go_cancel = () => {
+  uni.navigateTo({
+    url:'/pages/cancel'
+  })
+}
+console.log(isLoginStore.data);
 </script>
 
 <template>
@@ -70,7 +84,7 @@ const go_aboutUs = () => {
         </view>
         <view class="bar" id="bar_3">
           <text>预约记录</text>
-          <view class="key_box">
+          <view class="key_box" @click="go_cancel">
             <image
               src="../static/key.svg"
               mode="scaleToFill"

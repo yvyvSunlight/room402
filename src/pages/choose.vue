@@ -1,5 +1,13 @@
 <script setup>
-
+import helper from '../../common/helper.js';
+import  useRoleStore  from '@/stores/role';
+const roleStore = useRoleStore();
+const f_manager = () => {
+  roleStore.data = 'manager';
+}
+const f_student = () => {
+  roleStore.data = 'student'
+}
 </script>
 
 
@@ -11,16 +19,16 @@
       open-type="navigate"
       hover-class="navigator-hover"
     >
-      <button class="student"><image
+      <button class="student" @click="f_student"><image
         src="../static/studentClub_manager.svg"
         mode="scaleToFill"
       /></button>
       <navigator
-        url="/pages/"
+        url="/pages/completeInfor"
         open-type="navigate"
         hover-class="navigator-hover"
       >
-        <button class="manager">
+        <button class="manager" @click="f_manager">
           <image
             src="../static/room402_manager.svg"
             mode="scaleToFill"

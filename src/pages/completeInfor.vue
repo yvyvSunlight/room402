@@ -1,10 +1,53 @@
 <script setup>
   import helper from '../../common/helper.js';
+	import  useRoleStore  from '@/stores/role';
+	import  useIsLoginStore  from '@/stores/isLogin';
+  import { ref } from "vue";
+
+  const isLoginStore = useIsLoginStore();
+  const roleStore = useRoleStore();
   const goHome = () => {
-    uni.switchTab({
-    url:"/pages/home"
-  })
+    if(checked === false){
+    uni.showToast({
+      icon:'none',
+      title:'请先勾选同意使用手册'
+    })
+    return;
+  }
+    if(roleStore.data == 'manager'){
+      uni.switchTab({
+        url:'/pages/mine',
+      })
+    }else{
+      uni.switchTab({
+      url:"/pages/home"
+    })
+  }
    helper.isUser = 1;
+   isLoginStore.data = 1;
+   console.log(isLoginStore.data)
+  }
+  let imgArr = ref('');
+  const uploadPhoto = () => {
+    uni.chooseMedia({
+      count: 3,
+      mediaType: ['image','video'],
+      sourceType: ['album', 'camera'],
+      maxDuration: 30,
+      camera: 'back',
+      success(res) {
+        console.log(res.tempFiles)
+        imgArr.value = res.tempFiles[0].tempFilePath;
+        console.log(res.tempFiles[0].tempFilePath);
+        console.log(imgArr.value);
+        // console.log(res.tempFiles.tempFilePath);
+  }
+    })
+
+  }
+  let checked = false
+  const change = () => {
+    checked = true;
   }
 </script>
 <template>
@@ -22,13 +65,27 @@
     <input type="text" class="number_">
     <input type="text" class="phone_">
     <input type="text" class="club_">
-    <input type="text" class="proof_">
+    <view type="text" class="proof_" :disabled="true" @click="uploadPhoto">
+      <image
+        class="photo_show"
+        :src="imgArr"
+        mode="scaleToFill"
+      />
+    </view>
     <input type="text" class="code_" placeholder="请输入">
     <button class="codeButton">获取验证码</button>
-    <image
-      src="../static/isAgree.svg"
-      mode="scaleToFill"
+    <!-- <checkbox
+      :value="test"
+      :checked="true"
       class="check"
+    /> -->
+    <radio
+      :value="test"
+      :checked="checked"
+      class="check"
+      activeBackgroundColor="#55c6ff"
+      color="#55c6ff"
+      @click="change"
     />
     <text class="tail">同意《402房间使用手册》</text>
    
@@ -39,7 +96,9 @@
       src="../static/photo.svg"
       mode="scaleToFill"
       class="photo"
+      @click="uploadPhoto"
     />
+    
   </view>
 </template>
 
@@ -60,26 +119,13 @@ background: rgba(0, 170, 255, 0.1);
 border-radius: 14rpx;
 left: 256rpx;
 
-
 padding-left: 30rpx;
 padding-right: 30rpx;
-
-
-
-/* 请输入 */
-
-
-
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
 font-size: 25rpx;
 line-height: 34rpx;
-
-
-
-
-
 }
 .name_,.number_,.phone_,.code_ {
   width: 390rpx;
@@ -103,9 +149,14 @@ line-height: 34rpx;
   top: 360rpx;
 }
 .proof_{
+  position: absolute;
+  background: rgba(0, 170, 255, 0.1);
+  border-radius: 14rpx;
+  left: 256rpx;
   height: 140rpx;
-  width: 124rpx;
+  width: 184rpx;
   top: 524rpx;
+  overflow: hidden;
 }
 .proof{
   top: 524rpx;
@@ -213,7 +264,12 @@ height: 62rpx;
 
 }
 
-
+.photo_show{
+  position: absolute;
+  height: 140rpx;
+  width: 184rpx;
+  z-index: 1;
+}
 
 
 </style>

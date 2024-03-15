@@ -1,12 +1,17 @@
 <script setup>
-import helper from '../../common/helper.js';
+import  useIsLoginStore  from '@/stores/isLogin';
+
+import helper from "../../common/helper.js";
 import { ref } from "vue";
+import { onShow } from "@dcloudio/uni-app";
+
+
+const isLoginStore = useIsLoginStore();
 
 
 const isDisplay = ref('none')
-
 const open1 = () => {
-  if(helper.isUser===0){
+  if(isLoginStore.data===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -15,7 +20,7 @@ const open1 = () => {
   }
 }
 const open2 = () => {
-  if(helper.isUser===0){
+  if(isLoginStore.data===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -24,7 +29,7 @@ const open2 = () => {
   }
 }
 const open3 = () => {
-  if(helper.isUser===0){
+  if(isLoginStore.data===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -33,7 +38,7 @@ const open3 = () => {
   }
 }
 const open4 = () => {
-  if(helper.isUser===0){
+  if(isLoginStore.data===0){
     isDisplay.value = "block";
   }else{
     uni.navigateTo({
@@ -45,6 +50,22 @@ const closePrompt = () => {
   isDisplay.value = 'none';
 }
 
+console.log(isLoginStore.data);
+
+
+//-------------------------------
+const go_sign_in = () => {
+  uni.getLocation({
+    type: 'wgs84',
+    success: function (res) {
+      console.log('当前位置的经度：' + res.longitude);
+      console.log('当前位置的纬度：' + res.latitude);
+      uni.navigateTo({
+        url:'/pages/sign_in'
+      })
+    }
+  });
+}
 
 </script>
 
@@ -53,11 +74,8 @@ const closePrompt = () => {
   <view class="content">
     
     <text class="header">欢迎来到402房间预约小程序~</text>
-    <image
-      src="../static/switchRoles.png"
-      mode="scaleToFill"
-      class="switch"
-    />
+    
+
     <view class="uni-margin-wrap">
       <swiper class="swiper" circular :indicator-dots="false" :autoplay="true" :interval="2000"
       :duration="500">
@@ -72,6 +90,15 @@ const closePrompt = () => {
           </swiper-item>
       </swiper>
     </view>
+    <!-- <uni-notice-bar show-icon scrollable
+				text="uni-app 版正式发布，开发一次，同时发布iOS、Android、H5、微信小程序、支付宝小程序、百度小程序、头条小程序等7大平台。" /> -->
+    <view class="sign_in_box" @click="go_sign_in">
+      签到
+    </view>
+    <view class="sign_out_box" @click="go_sign_out">
+      签退
+    </view>
+
     <view class="blue">
   
     </view>
@@ -136,7 +163,7 @@ color: #979797;
     position: absolute;
     left: 50%;
     /* right: 7.47%; */
-    top: 124rpx;
+    top: 90rpx;
     transform: translateX(-50%);
     /* bottom: 56.9%; */
     display: flex;
@@ -144,7 +171,7 @@ color: #979797;
     align-items: center;
 	}
 	.swiper {
-		height: 400rpx;
+		height: 96rpx;
     width: 634rpx;
     overflow: hidden;
     display: flex;
@@ -155,17 +182,17 @@ color: #979797;
 	}
 	.swiper-item {
 		display: flex;
-		height: 400rpx;
+		height: 96rpx;
     width: 634rpx;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color:#55c6ff;
+    background-color:#dadada;
 	}
  .blue{
   position: absolute;
   left: 32rpx;
-  top: 584rpx;
+  top: 652rpx;
 
 
   background: #0283FA;
@@ -179,7 +206,7 @@ color: #979797;
 
 position: absolute;
 left: 72rpx;
-top: 588rpx;
+top: 656rpx;
 
 font-family: 'SimHei';
 font-style: normal;
@@ -196,9 +223,9 @@ color: #000000;
 .container{
 position: absolute;
 left: 34rpx;
-top: 688rpx;
+top: 756rpx;
 width: 680rpx;
-height: 552rpx;
+height: 520rpx;
 display: block;
 background: #FFFFFF;
 margin: 0 auto;
@@ -324,7 +351,59 @@ border-radius: 32rpx;
 
 
 }
+.sign_in_box{
+  position: absolute;
+  width: 400rpx;
+  height: 400rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc((208 - 88)*2rpx);
+  border-radius: 100%;
+  background-color: #c8eeff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  z-index: 2;
+
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 72rpx;
+  line-height: 92rpx;
+  text-align: center;
+  letter-spacing: -0.6rpx;
+
+  color: #000000;
 
 
+}
+.sign_out_box{
+  position: absolute;
+  width: 400rpx;
+  height: 400rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc((208 - 108)*2rpx);
+  border-radius: 200rpx;
+  background-color: #c8eeff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 72rpx;
+  line-height: 92rpx;
+  text-align: center;
+  letter-spacing: -0.6rpx;
+
+  color: #000000;
+
+}
 
 </style>

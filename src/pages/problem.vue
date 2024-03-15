@@ -1,14 +1,21 @@
   <script setup>
   import { ref } from "vue";
+  
+
+  let imgArr = ref('');
   const uploadPhoto = () => {
     uni.chooseMedia({
-      count: 9,
+      count: 3,
       mediaType: ['image','video'],
       sourceType: ['album', 'camera'],
       maxDuration: 30,
       camera: 'back',
       success(res) {
         console.log(res.tempFiles)
+        imgArr.value = res.tempFiles[0].tempFilePath;
+        console.log(res.tempFiles[0].tempFilePath);
+        console.log(imgArr.value);
+        // console.log(res.tempFiles.tempFilePath);
   }
     })
 
@@ -17,12 +24,53 @@
   const isDisplay = ref('none')
 
   const f_prompt = () => {
+    let date = new Date();
+    let current_y = date.getFullYear();
+    let current_m = date.getMonth() + 1;
+    let current_d = date.getDate();
+    let current_hour = date.getHours() + 1;
+    let current_minute = date.getMinutes();
+    let current_second = date.getSeconds();
+    uni.request({
+      url:'http://127.0.0.1:4523/m1/4094679-0-default/dsyfunc/',
+      method:'POST',
+      data:{
+        time:`${current_y}-${current_m}-${current_d} ${current_hour}:${current_minute}:${current_second}`,
+        item:"故障报修",
+        description:`${input_content.value}`
+      },
+      success:(success)=>{
+        console.log(success.data);
+        uni.showToast({
+          title:'success',
+          icon:'发送成功',
+          mask:true
+        })
+      },
+      fail:(fail)=>{
+        uni.showToast({
+          title: '失败',
+          icon: '发送失败',
+          mask: true
+        })
+      },
+    })
     isDisplay.value = 'block';
     setTimeout( () => {
       uni.switchTab({ url: '/pages/home' });
       isDisplay.value = 'none'
     },1000)
+    
   }
+  const input_content = ref(0);
+  const f_input = (e) => {
+    input_content.value = e.target.value;
+    console.log (e.target.value);
+    console.log('sus')
+    console.log(input_content.value)
+    console.log('sss2')
+  }
+
 
   </script>
 
@@ -38,12 +86,22 @@
 
 
     <view class="describe_box">
-      <textarea name="describe" id="describe" cols="30" rows="10" placeholder="请输入故障描述（字数100字以内）" auto-height="false"></textarea>
+      <textarea name="describe" id="describe" cols="30" rows="10" placeholder="请输入故障描述（字数100字以内）" auto-height="false" @input="f_input"></textarea>
 
     </view>
 
-    <view class="photo">
+    <view class="photo_box" @click="uploadPhoto">
+      <image
+        class="photo_img"
+        src="../static/plus.svg"
+        mode="scaleToFill"
+      />
+      <image
+        class="photo_show"
 
+        :src="imgArr"
+        mode="scaleToFill"
+      />
     </view>
 
 
@@ -245,4 +303,34 @@ color: #000000;
   /* padding: 0; */
   /* margin: 0; */
 }
+
+.photo_box{
+
+position: absolute;
+left: 70rpx;
+top: calc((234 - 88)*2rpx);
+display: flex;
+justify-content: center;
+align-items: center;
+height: 110rpx;
+width: 110rpx;
+border: solid;
+border-color: #dadada;
+}
+
+.photo_img{
+
+  height: 72rpx;
+  width: 72rpx;
+
+}
+.photo_show{
+  position: absolute;
+  height: 110rpx;
+  width: 110rpx;
+  z-index: 1;
+  src:v-bind(imgArr)
+}
+
+
 </style>

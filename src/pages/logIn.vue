@@ -4,6 +4,14 @@
   const wx_suc = () => {
     isDisplay.value = 'block';
   }
+
+
+
+
+  //登录的流程
+  // 1.使用uni.getUserInfo(OBJECT)获取用户的信息
+  
+  // 2. 
 </script>
 
 

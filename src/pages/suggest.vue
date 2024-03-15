@@ -1,11 +1,51 @@
 <script setup>
   import { ref } from "vue";
   const isDisplay = ref('none');
+
+  //获取输入
+  const input_content = ref('');
+  const f_input = (e) => {
+    input_content.value = e.target.value; 
+  }
   const f_prompt = () => {
     isDisplay.value = 'block';
+    let date = new Date();
+    let current_y = date.getFullYear();
+    let current_m = date.getMonth() + 1;
+    let current_d = date.getDate();
+    let current_hour = date.getHours() + 1;
+    let current_minute = date.getMinutes();
+    let current_second = date.getSeconds();
+    uni.request({
+      url:'http://127.0.0.1:4523/m1/4094679-0-default/feedback/',
+      method:'POST',
+      data:{
+        time:`${current_y}-${current_m}-${current_d}`,
+        decription:`${input_content.value}`
+      },
+      success:(success)=>{
+        console.log(success.data);
+        uni.showToast({
+          title:'success',
+          icon:'提交成功',
+          mask:true
+        })
+      },
+      fail:(fail)=>{
+        console.log('提交失败')
+        console.log(fail.data);
+        uni.showToast({
+          title:'fail',
+          icon:'提交失败',
+          mask:true
+        })
+      },
+    })
     setTimeout( () => {
+      
       uni.switchTab({ url: '/pages/home' });
-      isDisplay.value = 'none'
+      isDisplay.value = 'none';
+      
     },1000)
   }
 </script>
@@ -15,7 +55,7 @@
     <text class="title">意见反馈</text>
     <view class="line"></view>
     <view class="describe_box">
-      <textarea name="describe" id="descibe" cols="30" rows="10" placeholder="请输入使用意见反馈"></textarea>
+      <textarea name="describe" id="descibe" cols="30" rows="10" placeholder="请输入使用意见反馈" @input="f_input"></textarea>
     </view>
     <button class="submit" @click="f_prompt">提交</button>
 

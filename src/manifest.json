@@ -11,7 +11,25 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+
+        "requiredPrivateInfos": [
+            "getLocation",
+            "onLocationChange",
+            "startLocationUpdate",
+            "startLocationUpdateBackground",
+            "chooseAddress",
+            "chooseLocation",
+            "choosePoi"
+        ],
+        "permission": {
+            "scope.userLocation": {
+            "desc": "使用定位功能"
+               }
+           },
+           "requiredPrivateInfos": [
+            "getLocation"
+           ],
     },
     "uniStatistics": {  
         "enable": false
