@@ -1,5 +1,6 @@
-//apifox地址
-const baseURL = 'http://127.0.0.1:4523/m1/4093063-0-default'
+import useUserStore from "@/stores/user"
+//地址
+const baseURL = 'https://api.room402.temp.ziqiang.net.cn'
 
 //添加拦截器
 const httpInterceptor = {
@@ -17,11 +18,11 @@ const httpInterceptor = {
             'source-client':'miniapp',
         }
         //4.添加token请求头
-        // const memberStore = useMemberStore()
-        // const token = memberStore.profile?.token
-        // if(token){
-        //     options.header.Authorization = token
-        // }
+        const userStore = useUserStore()
+        const token = userStore.profile?.token
+        if(token){
+            options.header.Authorization = token
+        }
         console.log(options)
     }
 }
@@ -38,12 +39,16 @@ export const http = (options) => {
 
             //2.请求成功
             success(res){
+                console.log(res.statusCode);
+                console.log(res.data);
                 if(res.statusCode >= 200 && res.statusCode < 300){
                     //2.1提取核心数据
                     resolve(res.data)
                 }else if(res.statusCode === 401){
                     //401错误 -> 清理用户信息，跳转到登录页
-                    uni.navigateTo({url:'/pages/home'})
+                    const userStore = useUserStore();
+                    userStore.clearProfile();
+                    uni.switchTab({url:'/pages/home'})
                     reject(res)
                 }else{
                     uni.showToast({

@@ -98,7 +98,6 @@
       />
       <image
         class="photo_show"
-
         :src="imgArr"
         mode="scaleToFill"
       />

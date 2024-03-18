@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-
+import { http } from '@/utils/http.js';
 const longitude_now = ref();
 const latitude_now = ref();
 // onMounted(() => {
@@ -56,7 +56,37 @@ const markers = ref([
       }
   },
 ])
-
+const f_test = async() => {
+  const res = await http({
+    method:'PUT',
+    url:'/sign/{id}',
+    data:{
+      id:1,
+      date:`2024-3-16`,
+      user_id:`1`,
+      option:1,
+      validator:1
+    },
+    success:(res) => {
+      uni.showToast({
+        title:'susss'
+      })
+      console.log(res.data);
+    },
+    fail:(fail)=>{
+      uni.showToast({
+        title:"no"
+      })
+    },
+    
+  })
+}
+// f_test();
+const f_test2  = () => {
+  uni.request({
+    url:''
+  })
+}
 // 格式化经纬度
 // const rad = (d) => {
 //   return (d * Math.PI) / 180.0

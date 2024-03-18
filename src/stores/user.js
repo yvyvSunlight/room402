@@ -6,9 +6,18 @@ import { defineStore } from 'pinia';
 
 
 export default defineStore('user',()=>{
-	const name = ref('张三');
-	const code = ref('test123456');
-	return {name,code};
+	const profile = ref();
+	const setProfile = (val) => {
+		profile.value = val
+	};
+	const clearProfile = () => {
+		profile.value = undefined
+	}
+	return {
+		profile,
+		setProfile,
+		clearProfile
+	};
 },{
 	// persist:true,//只能网页端
 	//小程序端

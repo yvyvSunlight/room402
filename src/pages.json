@@ -84,6 +84,12 @@
 			"style": {
 				"navigationBarTitleText": "签退"
 			}
+		},
+		{
+			"path": "pages/meetings",
+			"style": {
+				"navigationBarTitleText": "我的会议"
+			}
 		}
 	],
 	"globalStyle": {
@@ -99,19 +105,19 @@
 				"pagePath": "pages/home",
 				"iconPath": "static/home.png",
 				"selectedIconPath": "static/home_active.png",
-				"text":"首页"
+				"text": "首页"
 			},
 			{
 				"pagePath": "pages/messages",
 				"iconPath": "static/message.png",
 				"selectedIconPath": "static/message_active.png",
-				"text":"消息"
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/mine",
 				"iconPath": "static/personal.png",
 				"selectedIconPath": "static/personal_active.png",
-				"text":"我的"
+				"text": "我的"
 			}
 		]
 	}

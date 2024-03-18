@@ -2,6 +2,7 @@
   import { onReady } from '@dcloudio/uni-app';
   import {onMounted, ref} from 'vue';
   import { getCurrentInstance } from "vue";
+  import { http } from '@/utils/http'
   // import { createSSRApp } from "vue";
   // let vm = createSSRApp(App)({
   //   el:'#app',
@@ -321,7 +322,6 @@
           }else{
             day.value ++;
           }
-
         }else{
           // day.value = (day.value + 1 + parseInt(day.value/28)) % 29 ;
           if(day.value === 28){
@@ -440,24 +440,25 @@
 
   const f_prompt = () => {
     isDisplay.value = 'block';
-    uni.request({
-      url:'http://127.0.0.1:4523/m1/4123855-0-default/reservation/',
+    
+    const user_id = 1;
+    http({
+      url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id=${user_id}&date=${current_y}-${current_m}-${current_d}`,
       method:'POST',
+
       data:{
-        date:`${year}-${month}-${day}`,
-        user_id:`1`,
-        object:
-        {
-          start_time:`${time0_}`,
-          end_time:`${time1_}`
-        }
+          theme:'test',
+          start_time:  `${year.value}-${month.value}-${day.value} ${time0_.value}`,
+          ueser_id:'1',
+          end_time: `${year.value}-${month.value}-${day.value} ${time1_.value}`,
+          date:'2024-03-18',
       },
-      success:(res)=>{
-        console.log(res.data);
-      },
-      fail:(fail)=>{
-        console.log(fail.data);
-      },
+      // success:(res)=>{
+      //   console.log(res.data);
+      // },
+      // fail:(fail)=>{
+      //   console.log(fail.data);
+      // },
     })
     setTimeout( () => {
       uni.switchTab({ url: '/pages/home' });

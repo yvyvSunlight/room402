@@ -2,47 +2,79 @@
 import helper from "../../common/helper.js";
 import  useIsLoginStore  from '@/stores/isLogin';
 import { onMounted, ref } from "vue";
+import '@/utils/http';
+import { get_notice_all } from '../services/get.js';
+import { onLoad } from "@dcloudio/uni-app";
 const isLoginStore = useIsLoginStore();
 const isDisplay = ref('block') ;
 let items = ref([]);
 const isUser = ref(isLoginStore.data)
 if(isLoginStore.data == 1){
-  isDisplay.value = 'none'
+  isDisplay.value = 'none';
 }
 const closePrompt = () => {
-  isDisplay.value='none'
+  isDisplay.value='none';
 }
-// const componentTest = new Vue ({
-//   render:h => h('div','我是动态组件')
-// }) 
+
+
+
 const date = ref('')
 const content = ref('')
-onMounted(() => {
 
+// const get_messages = async () => {
+//     const res  = await get_notice_all();
+//     console.log(res);
+//   }
+const get_messages = () => {
   uni.request({
-    url:'http://127.0.0.1:4523/m1/4094679-0-default/notice/all',
+    url:'https://api.room402.temp.ziqiang.net.cn/notice/all',
     method:'GET',
-    success:(success)=>{
-      // date.value = success.data[0].time;
-      items.value = success.data;
-      content.value = success.data[0].content;
-    },
-    fail:(fail)=>{
-      uni.showToast({
-        title: 'fail',
-        icon: 'none',
-        image: '',
-        duration: 1500,
-        mask: false,
-        success: (result)=>{
-          
-        },
-        fail: ()=>{},
-        complete: ()=>{}
-      });
+    success:(suc)=>{
+      console.log(suc.data);
     },
   })
+}
+
+onLoad(() => {
+  get_messages();
 })
+
+
+// onMounted(async() => {
+//   const res = await http({
+//     method:'GET',
+//     url:'/reservation/',
+//     success:(res) => {
+//       date.value = res.data[0].time;
+//       items.value = res.data;
+//     }
+//   })
+  
+ 
+  // uni.request({
+  //   url:'http://127.0.0.1:4523/m1/4094679-0-default/notice/all',
+  //   method:'GET',
+  //   success:(success)=>{
+  //     // date.value = success.data[0].time;
+  //     items.value = success.data;
+  //     content.value = success.data[0].content;
+  //   },
+  //   fail:(fail)=>{
+  //     uni.showToast({
+  //       title: 'fail',
+  //       icon: 'none',
+  //       image: '',
+  //       duration: 1500,
+  //       mask: false,
+  //       success: (result)=>{
+          
+  //       },
+  //       fail: ()=>{},
+  //       complete: ()=>{}
+  //     });
+  //   },
+  // })
+// })
 date.value = '2/14/2024'
 // const createNewElement = () => {
 //   const parent = document.getElementById("bg")

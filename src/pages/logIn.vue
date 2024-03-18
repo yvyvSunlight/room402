@@ -2,7 +2,20 @@
   import { ref } from "vue";
   const isDisplay = ref('none')
   const wx_suc = () => {
-    isDisplay.value = 'block';
+    // isDisplay.value = 'block';
+      uni.getUserProfile({
+        desc:'微信登录后同步数据',
+        success:(ures)=>{
+          console.log(ures);
+          uni.login({success:(lres)=>{
+            console.log(lres);
+            uni.navigateTo({
+              url:'/pages/choose'
+            })
+          },
+        })
+      },
+    })
   }
 
 
@@ -16,13 +29,13 @@
 
 
 <template>
-  <div class="bg">
+  <!-- <div class="bg">
     <input type="text" placeholder="账号">
     <input type="text" placeholder="密码">
-  </div>
-  <button class="submit">登录</button>
-  <text class="middle">或一键授权微信注册/登录</text>
-  <button class="weixin" @click="wx_suc">微信一键注册/登录</button>
+  </div> -->
+  <!-- <button class="submit">登录</button> -->
+  <text class="middle">一键授权微信注册/登录</text>
+  <button class="weixin" @click="wx_suc" open-type="getUserInfo" bindgetuserinfo="getUserInfo">微信一键注册/登录</button>
 
   <view class="prompt_suc">
     <text class="content">注册成功！</text>
@@ -113,7 +126,7 @@ color: #F6F1FB;
 position: absolute;
 left: 50%;
 transform: translateX(-50%);
-top: 572rpx;
+top: calc((406 - 88)*2rpx);
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
@@ -130,13 +143,20 @@ color: #A1A4B2;
 }
 
 .weixin{
+/* Rectangle 210 */
+
+/* Group 6800 */
+
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top:calc((323 - 88)*2rpx);
+
+filter: drop-shadow(0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25));
+
 
   /* Rectangle 210 */
 
-position: absolute;
-top:650rpx;
-left: 50%;
-transform: translateX(-50%);
 
 width: 680rpx;
 height: 105.44rpx;
