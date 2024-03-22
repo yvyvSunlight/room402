@@ -307,7 +307,7 @@ color: #000000;
 
 position: absolute;
 left: 70rpx;
-top: calc((234 - 88)*2rpx);
+top: calc((234 - 68)*2rpx);
 display: flex;
 justify-content: center;
 align-items: center;

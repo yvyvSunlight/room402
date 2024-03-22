@@ -19,22 +19,27 @@ const f_student = () => {
       open-type="navigate"
       hover-class="navigator-hover"
     >
-      <button class="student" @click="f_student"><image
+      <button class="student" @click="f_student">
+        <text>我是学生社团管理人员</text> 
+        <image
         src="../static/studentClub_manager.svg"
         mode="scaleToFill"
       /></button>
-      <navigator
+    </navigator>
+    <navigator
         url="/pages/completeInfor"
         open-type="navigate"
         hover-class="navigator-hover"
       >
         <button class="manager" @click="f_manager">
+          <text>
+            我是402房间的管理人员
+          </text>
           <image
             src="../static/room402_manager.svg"
             mode="scaleToFill"
           />
         </button>
-      </navigator>
     </navigator>
   </view>
 </template>
@@ -87,10 +92,24 @@ border-radius: 40rpx;
   top: 422rpx;
 }
 image{
-  width: 582rpx;
-  height: 164rpx;
+  width: 90rpx;
+  height: 90rpx;
   position: absolute;
-  left: 30rpx;
-  top: 42rpx;
+  left: calc((293 - 30)*2rpx);
+  top: calc((194 - 158)*2rpx);
+}
+button text{
+  /* 我是学生社团管理人员 */
+
+position: absolute;
+left: 58rpx;
+top: 92rpx;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 40rpx;
+line-height: 48rpx;
+color: #000000;
 }
 </style>

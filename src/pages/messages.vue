@@ -134,6 +134,12 @@ const f_test = () => {
 f_test();
 
 //---------------------------------------------
+
+const go_mine = () => {
+  uni.switchTab({
+    url:'/pages/mine'
+  })
+}
 </script>
 
 
@@ -164,9 +170,14 @@ f_test();
 
 
 
-    <view class="prompt" v-if="!isUser">
+    <!-- <view class="prompt" v-if="!isUser">
       <view>请先登录!</view>
       <button @click="closePrompt">确认</button>
+    </view> -->
+    <view class="prompt" v-if="isLoginStore.data===0">
+      <view class="up">请先登录</view>
+      <view class="line_prompt"></view>
+      <view class="down" @click="go_mine">确定</view>
     </view>
 
   </view>
@@ -179,41 +190,7 @@ f_test();
   height: 100vh;
   background-color: #f5f5f5;
 }
-.prompt{
-position: absolute;
-left: 50%; top: 50%;
-transform: translate(-50%, -50%);
-width: 344px;
-height: 362px;
-display: v-bind(isDisplay);
 
-background: #FFFBFB;
-border-radius: 32px;
-padding-top: 20px;
-}
-.prompt view{
-  /* 请先登录！ */
-
-position: absolute;
-left: 59px;
-top: 100px;
-width: 241px;
-height: 61px;
-
-
-font-family: 'Microsoft YaHei UI';
-font-style: normal;
-font-weight: 400;
-font-size: 48px;
-line-height: 61px;
-/* identical to box height */
-text-align: center;
-letter-spacing: -0.3px;
-
-color: #000000;
-margin: 0 auto;
-
-}
 button{
   /* Component 9 */
 
@@ -361,5 +338,70 @@ letter-spacing: -0.3px;
 color: #6D6D6D;
 
 
+}
+
+
+.prompt{
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%);
+  top: 310rpx;
+  width: calc(365*2rpx);
+  height: calc(175*2rpx);
+  border-radius: 30rpx;
+  background: #FFFBFB;
+  z-index: 4;
+}
+.line_prompt{
+  width: calc(365*2rpx);
+  height: 0;
+  position: absolute;
+  top: calc(118*2rpx);
+  border: 2rpx solid #E1E1E1;
+  transform: rotate(0.16deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+.up{
+  position: absolute;
+  width: 228px;
+  height: 25px;
+  left: 72px;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  z-index: 4;
+  color: #000000;
+}
+.down{
+  position: absolute;
+  width: calc(365*2rpx);
+  height: calc((175 - 118)*2rpx);
+  top: calc(118*2rpx);
+  overflow: hidden;
+
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40rpx;
+  line-height: 50rpx;
+  text-align: center;
+  letter-spacing: -0.6rpx;
+  z-index: 4;
+  color: #0029B9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -3,6 +3,7 @@
   import {onMounted, ref} from 'vue';
   import { getCurrentInstance } from "vue";
   import { http } from '@/utils/http'
+  import "@/utils/http";
   // import { createSSRApp } from "vue";
   // let vm = createSSRApp(App)({
   //   el:'#app',
@@ -439,26 +440,36 @@
   const isDisplay = ref('none');
 
   const f_prompt = () => {
+    if(!input_content.value){
+      uni.showToast({
+        icon:'none',
+        title:'请输入会议主题'
+      })
+      return;
+    }
+    console.log(input_content.value);
     isDisplay.value = 'block';
     
     const user_id = 1;
-    http({
-      url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id=${user_id}&date=${current_y}-${current_m}-${current_d}`,
+    uni.request({
+      url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id=${user_id}&date=${current_y}-0${current_m}-${current_d}`,
       method:'POST',
 
       data:{
-          theme:'test',
+          theme:`${input_content.value}`,
           start_time:  `${year.value}-${month.value}-${day.value} ${time0_.value}`,
-          ueser_id:'1',
           end_time: `${year.value}-${month.value}-${day.value} ${time1_.value}`,
-          date:'2024-03-18',
+          user:'1'
+          // user_id:'1',
+          // date:`${year.value}-${month.value}-${day.value}`,
       },
-      // success:(res)=>{
-      //   console.log(res.data);
-      // },
-      // fail:(fail)=>{
-      //   console.log(fail.data);
-      // },
+      success:(res)=>{
+        console.log(res.data);
+        console.log('成功');
+      },
+      fail:(fail)=>{
+        console.log(fail.data);
+      },
     })
     setTimeout( () => {
       uni.switchTab({ url: '/pages/home' });
@@ -476,13 +487,26 @@
     tab_disp.value = 'none';
   }
   console.log(tab_disp.value);
+  const input_content = ref();
+  const f_input = (e) => {
+    input_content.value = e.target.value;
+    console.log (e.target.value);
+    console.log('sus')
+    console.log(input_content.value)
+    console.log('sss2')
+  }
+
+  const f_click = () => {
+    console.log('clicked');
+  }
 </script>
 
 
 <template>
   <view class="layout">
     <text class="theme">会议主题</text>
-    <input type="text" class="describe">
+
+    <input type="text" class="describe" @input="f_input" cursor-color="#246bfd">
     <view class="lineup"></view>
 
 
@@ -579,7 +603,7 @@
     </view>
     <view class="linedown"></view>
 
-    <text class="options">会议选项</text>
+    <!-- <text class="options">会议选项</text> -->
     <view class="remind_v">
       <text class="remind">会议提醒</text>
       <text class="remind_">{{ remind_input }}</text>
@@ -601,12 +625,12 @@
     <text class="place">
       会议地点
     </text>
-
-    <image
+    <view class="place_">本科生院402房间</view>
+    <!-- <image
       src="../static/book_content.png"
       mode="scaleToFill"
       class="book_content"
-    />
+    /> -->
 
     <button class="book" @click="f_prompt">预约</button>
     <view class="prompt">
@@ -683,7 +707,25 @@
   background-color: #fff;
 
 }
+.place_{
+  /* 本科生院402 */
 
+position: absolute;
+width: calc(147*2rpx);
+height: 44rpx;
+left: calc(178*2rpx);
+top: 828rpx;
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 550;
+font-size: 36rpx;
+line-height: 44rpx;
+/* identical to box height */
+text-align: center;
+letter-spacing: -0.6rpx;
+color: #000000;
+}
 
 
 .layout{
@@ -694,7 +736,6 @@
   top: 34rpx;
 }
 .theme{
-  /* 会议主题 */
 
 width: 624rpx;
 height: 48rpx;
@@ -720,26 +761,20 @@ flex-grow: 0;
 
 }
 .describe{
-  /* Status=Fill, Type=Default, State=Filled Input, Theme=Light, Component=Input Field */
 
 position: absolute;
 top: 80rpx;
-
-/* Auto layout */
+z-index: 5;
+overflow: hidden;
 display: flex;
 flex-direction: row;
 align-items: center;
 padding: 0px 40rpx;
 gap: 24rpx;
-
 width: 544rpx;
 height: 112rpx;
-
-/* Greyscale / 50 */
 background: #FAFAFA;
 border-radius: 32rpx;
-
-/* Inside auto layout */
 flex: none;
 order: 1;
 align-self: stretch;
@@ -1011,11 +1046,12 @@ top: 630rpx;
 
 
 .remind_{
-
+position: absolute;
+left: 366rpx;
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 500;
-font-size: 24rpx;
+font-size: 29rpx;
 line-height: 140%;
 /* or 25px */
 letter-spacing: 0.4rpx;
@@ -1227,7 +1263,7 @@ overflow: hidden;
 .select_reminder_box{
   overflow: hidden;
   position: absolute;
-  height: calc(172*2rpx);
+  height: fit-content;
   width: 468rpx;
   top: 814rpx;
   left: calc((312 - 234)*2rpx);

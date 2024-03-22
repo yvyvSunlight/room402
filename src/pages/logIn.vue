@@ -1,14 +1,47 @@
 <script setup>
   import { ref } from "vue";
+  import "@/utils/http";
   const isDisplay = ref('none')
   const wx_suc = () => {
     // isDisplay.value = 'block';
       uni.getUserProfile({
-        desc:'微信登录后同步数据',
+        desc:'微信登录',
         success:(ures)=>{
           console.log(ures);
           uni.login({success:(lres)=>{
             console.log(lres);
+            let params = lres.code;
+            //backend
+            uni.request({
+              url:'https://api.room402.temp.ziqiang.net.cn/wx/login',
+              method:'GET',
+              data:{
+                code:params
+              },
+              success:(success)=>{
+                console.log(success.data);
+                console.log(success);
+              },
+            })
+
+            //my
+            uni.request({
+              url:'https://api.weixin.qq.com/sns/jscode2session',
+              method:'GET',
+              data:{
+                appid:'wxbb790dfebfba6b18',
+                secret:'92ad213ff31f718a3ab140beb3db90f8',
+                js_code:params,
+                grant_type:'authorization_code',
+              },
+              success:(success)=>{
+                console.log('my');
+                console.log(success.data);
+              },
+              fail:(fail)=>{
+                console.log('fail');
+              },
+            })
             uni.navigateTo({
               url:'/pages/choose'
             })
@@ -17,6 +50,49 @@
       },
     })
   }
+
+
+
+  // const getUserInfo = () => {
+	// 			return new Promise((resolve, reject) => {
+	// 				wx.getUserProfile({
+	// 					lang: 'zh_CN',
+	// 					desc: '用户登录', 
+	// 					success: (res) => {
+	// 						resolve(res.userInfo)
+	// 					},
+	// 					fail: (err) => {
+	// 						reject(err)
+	// 					}
+	// 				})
+	// 			})
+	// 		}
+ 
+	// const	getLogin = () => {
+	// 			return new Promise((resolve, reject) => {
+	// 				wx.login({
+	// 					success(res) {
+	// 						resolve(res.code)
+	// 					},
+	// 					fail: (err) => {
+	// 						reject(err)
+	// 					}
+	// 				})
+	// 			})
+	// 		}
+ 
+  // const wx_suc = () => {
+  //       let userInfo = getUserInfo();
+	// 			let wxCode = getLogin();
+				
+ 
+	// 			Promise.all([userInfo, wxCode]).then((res) => {
+	// 				//都获取权限成功
+  //         console.log(res);
+	// 			}).catch(err => {
+					
+	// 			})
+  //           }
 
 
 

@@ -55,16 +55,16 @@
     <!-- <view class="sider"> -->
       <text class="name">姓名：</text>
       <text class="number">学号：</text>
-      <text class="phone">手机号：</text>
       <text class="club">社团名称：</text>
       <text class="proof">社团证明：</text>
-      <text class="code">验证码：</text>
+      <text class="department">部门：</text>
      
     <!-- </view> -->
     <input type="text" class="name_">
     <input type="text" class="number_">
-    <input type="text" class="phone_">
+    <!-- <input type="text" class="phone_"> -->
     <input type="text" class="club_">
+    <input type="text" class="department_">
     <view type="text" class="proof_" :disabled="true" @click="uploadPhoto">
       <image
         class="photo_show"
@@ -72,15 +72,7 @@
         mode="scaleToFill"
       />
     </view>
-    <input type="text" class="code_" placeholder="请输入">
-    <button class="codeButton">获取验证码</button>
-    <!-- <checkbox
-      :value="test"
-      :checked="true"
-      class="check"
-    /> -->
     <radio
-      :value="test"
       :checked="checked"
       class="check"
       activeBackgroundColor="#55c6ff"
@@ -127,7 +119,7 @@ font-weight: 400;
 font-size: 25rpx;
 line-height: 34rpx;
 }
-.name_,.number_,.phone_,.code_ {
+.name_,.number_,.department_,.code_ ,.club_{
   width: 390rpx;
   height: 62rpx;
 }
@@ -137,15 +129,10 @@ line-height: 34rpx;
 .number_,.number{
   top: 180rpx;
 }
-.phone_,.phone{
+.club_,.club{
   top: 268rpx;
 }
-.club_{
-  width: 390rpx;
-  height: 138rpx;
-  top: 360rpx;
-}
-.club{
+.department_,.department{
   top: 360rpx;
 }
 .proof_{
@@ -155,18 +142,19 @@ line-height: 34rpx;
   left: 256rpx;
   height: 140rpx;
   width: 184rpx;
-  top: 524rpx;
+  top:calc((314 - 88)*2rpx);
+  /* top: 524rpx; */
   overflow: hidden;
 }
 .proof{
-  top: 524rpx;
+  /* top: 524rpx; */
+  top:calc((314 - 88)*2rpx);
 }
 .code_,.code{
   top: 708rpx;
 }
 .codeButton{
 
-  /* Component 17 */
 
 position: absolute;
 width: 120rpx;
@@ -175,7 +163,6 @@ left: 574rpx;
 top: 722rpx;
 
 
-  /* 获取验证码 */
 
 display: flex;
 justify-content: center;
@@ -257,7 +244,7 @@ color: #FFFFFF;
 
 position: absolute;
 left: 318rpx;
-top: 562rpx;
+top:490rpx;
 width: 62rpx;
 height: 62rpx;
 

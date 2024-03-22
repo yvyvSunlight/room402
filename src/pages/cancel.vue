@@ -23,17 +23,13 @@ let id_cancel;
 const time0_ = ref('')
 const time1_ = ref('')
 uni.request({
-	url:'http://127.0.0.1:4523/m2/4123855-0-default/153376548',
+	url:'https://api.room402.temp.ziqiang.net.cn/cancel/',
 	method:'GET',
 	data:{
 		user_id:'1'
 	},
 	success:(success)=>{
-		console.log(success.data[0]);
-		id_cancel = success.data[0].id;
-		// time0_.value = success.data[0].start_time
-		// time1_.value = success.data[0].end_time
-
+		console.log(success.data);
 	},
 })
 const isDisplay = ref('none')
@@ -41,13 +37,7 @@ time0_.value = '09:30'
 time1_.value='10:00'
 
 const f_cancel = () => {
-	uni.request({
-		url:'http://127.0.0.1:4523/m1/4123855-0-default/cancel/1',
-		method:'DELETE',
-		data:{
-			id:`${id_cancel}`
-		}
-	})
+	
 	isDisplay.value = 'block'
 	setTimeout( () => {
       uni.switchTab({ url: '/pages/home' });

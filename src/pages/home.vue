@@ -47,8 +47,11 @@ const open4 = () => {
   })
   }
 }
-const closePrompt = () => {
-  isDisplay.value = 'none';
+const go_mine = () => {
+  // isDisplay.value = 'none';
+  uni.switchTab({
+    url:'/pages/mine'
+  })
 }
 
 console.log(isLoginStore.data);
@@ -56,142 +59,18 @@ console.log(isLoginStore.data);
 
 //-------------------------------
 
-// 格式化经纬度
-const rad = (d) => {
-        return (d * Math.PI) / 180.0
-      }
-      // 计算距离
-      const getDistance = (point1, point2) => {
-        let [x1, y1] = point1
-        let [x2, y2] = point2
-        let Lat1 = rad(x1) // 纬度
-        let Lat2 = rad(x2)
-        let a = Lat1 - Lat2 //	两点纬度之差
-        let b = rad(y1) - rad(y2) //	经度之差
-        let s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(Lat1) * Math.cos(Lat2) * Math.pow(Math.sin(b / 2), 2)))
-        //	计算两点距离的公式
-        s = s * 6378137.0 //	弧长等于弧度乘地球半径（半径为米）
-        s = Math.round(s * 10000) / 10000 //	精确距离的数值
-        // distance.value = s
-        return s;
-      }
-const f_in_sus =async () => {
-      await uni.navigateTo({
-            url:'/pages/meetings'
-          })
-      // await new Promise(() => {
-      //     isSignStore.value = 1;
-      //   })  
-}
-const f_out_sus =async () => {
-      await uni.navigateTo({
-            url:'/pages/sign_out'
-          })
-      await new Promise(() => {
-          isSignStore.value = 0;
-        })  
-}
-const judge_sign_in = () => {
-  uni.getLocation({
-    isHighAccuracy:true,
-    type: 'wgs84',
-    success: function (res) {
-      uni.hideLoading();
-      console.log('当前位置的经度：' + res.longitude);
-      console.log('当前位置的纬度：' + res.latitude);
-      
-      const p1 = [res.latitude,res.longitude];
-      const p2 = [30.534052, 114.35787];
-      let s = getDistance(p1,p2);
-
-      if(s < 9000){
-          f_in_sus();
-
-      }else{
-        uni.showToast({
-          title:'签到失败',
-          icon:'none'
-        })
-      }
-      
-    }
-  });
-}
-
-const judge_sign_out = () => {
-  uni.getLocation({
-    type: 'wgs84',
-    success: function (res) {
-      uni.hideLoading();
-      console.log('当前位置的经度：' + res.longitude);
-      console.log('当前位置的纬度：' + res.latitude);
-      
-      const p1 = [res.latitude,res.longitude];
-      const p2 = [30.534052, 114.35787];
-      let s = getDistance(p1,p2);
-
-      if(s < 9000){
-        f_out_sus();
-      }else{
-        uni.showToast({
-          title:'签退失败',
-          icon:'none'
-        })
-      }
-      
-    }
-  });
-}
-const loading = () => {
-  return new Promise((resolve) =>{
-    uni.showLoading({
-    title: '定位中...',
-    mask: true,
-  })
-  })
-}
-const go_sign_in = async () => {
-  loading();
-  await new Promise(() => {
-    judge_sign_in(); 
-  })
-}
-
-
-// const go_sign_out =async () => {
-//   loading();
-//   await new Promise(() => {
-//     judge_sign_out();
-//   })
-// }
 
 
 
 onMounted(() => {
-  // uni.request({
-  //   url:'https://api.room402.temp.ziqiang.net.cn/api/login',
-  //   method:'POST',
-  //   data:{
-  //     username:'admin',
-  //     password:'123456'
-  //   },
-  //   // header: {
-	// 	// 							'content-type': 'application/x-www-form-urlencoded'
-	// 	// 						},
-  //   success:(success)=>{
-  //     console.log(success.data);
-  //     uni.showToast({
-  //       title:''
-  //     })
-  //   },
-  //   fail:(fail)=>{
-  //     console.log('fail');
-  //     console.log(fail.data);
-  //   },
-  // })
+
 })
 
 const go_meetings = () => {
+  if(isLoginStore.data === 0)
+  {
+    return;
+  }
   uni.navigateTo({
     url:'/pages/meetings'
   })
@@ -203,7 +82,6 @@ const go_meetings = () => {
   <view class="content">
     
     <text class="header">欢迎来到402房间预约小程序~</text>
-    
 
     <!-- <view class="uni-margin-wrap">
       <swiper class="swiper" circular :indicator-dots="false" :autoplay="true" :interval="2000"
@@ -222,6 +100,12 @@ const go_meetings = () => {
     <UniNoticeBar show-icon scrollable
         class="notice"
 				text="公告：武汉大学本科生院402房间的使用时间为早上9：00~晚上21：30" />
+    <!-- <view class="bg_img_box">
+      <image
+        src="../static/home_bg.svg"
+        mode="scaleToFill"
+      />
+    </view> -->
     <view class="sign_in_box" @click="go_meetings">
       打卡
     </view>
@@ -242,9 +126,16 @@ const go_meetings = () => {
     </view>
   
     
-    <view class="prompt">
+    <!-- <view class="prompt">
       <view>请先登录!</view>
       <button @click="closePrompt">确认</button>
+    </view> -->
+
+
+    <view class="prompt" v-if="isLoginStore.data===0">
+      <view class="up">请先登录</view>
+      <view class="line"></view>
+      <view class="down" @click="go_mine">确定</view>
     </view>
 
     
@@ -362,17 +253,17 @@ position: absolute;
 left: 34rpx;
 top: 756rpx;
 width: 680rpx;
-height: 520rpx;
+height: 480rpx;
 display: block;
 background: #FFFFFF;
 margin: 0 auto;
+border-radius: 20rpx;
 
 }
 .container view{
   position: absolute;
-
-width: 292rpx;
-height: 182rpx;
+width: 278rpx;
+height: 162rpx;
 background: #C8EEFF;
 border-radius: 32rpx;
 font-family: 'Microsoft YaHei UI';
@@ -386,54 +277,116 @@ display: flex;
 justify-content: center;
 align-items: center;
 color: #0071D9;
+
+/* Rectangle 24 */
+
+/* button/预约房间 */
+
+
+
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
+
+
+
+
 }
 #book{
-
-
 position: absolute;
-left: 32rpx;
-top: 48rpx;
-
-
-
+left: 39rpx;
+top: 43rpx;
 }
 #cancel{
   position: absolute;
-  left:360rpx;
-  top: 48rpx;
+  left:367rpx;
+  top: 43rpx;
 
 }
 #problem{
-
-
   position: absolute;
-  left: 32rpx;
-  top: 298rpx;
-
-
+  left: 39rpx;
+  top: 258rpx;
 }
 #suggest{
-
   position: absolute;
-
-  left: 360rpx;
-  top: 298rpx;
-
+  left: 367rpx;
+  top: 258rpx;
 }
 .prompt{
-position: absolute;
-left: 50%; top: 50%;
-transform: translate(-50%, -50%);
-width: 688rpx;
-height: 734rpx;
-display: v-bind(isDisplay);
-background: #FFFBFB;
-border-radius: 64rpx;
-padding-top: 80rpx;
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%);
+  top: 310rpx;
+  width: calc(365*2rpx);
+  height: calc(175*2rpx);
+  border-radius: 30rpx;
+  background: #FFFBFB;
+  z-index: 4;
 }
-.prompt view{
-  /* 请先登录！ */
+.line{
+  width: calc(365*2rpx);
+  height: 0;
+  position: absolute;
+  top: calc(118*2rpx);
+  border: 2rpx solid #E1E1E1;
+  transform: rotate(0.16deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+.up{
+  position: absolute;
+  width: 228px;
+  height: 25px;
+  left: 72px;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  letter-spacing: -0.3px;
+  z-index: 4;
+  color: #000000;
+}
+.down{
+  position: absolute;
+  width: calc(365*2rpx);
+  height: calc((175 - 118)*2rpx);
+  top: calc(118*2rpx);
+  overflow: hidden;
 
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40rpx;
+  line-height: 50rpx;
+  text-align: center;
+  letter-spacing: -0.6rpx;
+  z-index: 4;
+  color: #0029B9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+
+/*
+.prompt view{
 position: absolute;
 left: 118rpx;
 top: 200rpx;
@@ -446,7 +399,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 96rpx;
 line-height: 122rpx;
-/* identical to box height */
+
 text-align: center;
 letter-spacing: -0.6rpx;
 
@@ -454,6 +407,8 @@ color: #000000;
 margin: 0 auto;
 
 }
+*/
+
 button{
   /* Component 9 */
 
@@ -514,6 +469,10 @@ border-radius: 32rpx;
   letter-spacing: -0.6rpx;
 
   color: #000000;
+
+
+box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
+
 
 
 }
