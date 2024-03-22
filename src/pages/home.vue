@@ -1,5 +1,6 @@
 <script setup>
 import  useIsLoginStore  from '@/stores/isLogin';
+import useUserStore from "@/stores/user";
 import UniNoticeBar from "@/components/uni-notice-bar/uni-notice-bar.vue";
 import helper from "../../common/helper.js";
 import { onMounted, ref } from "vue";
@@ -9,7 +10,7 @@ import useIsSignStore from "@/stores/isSign";
 components:{UniNoticeBar}
 const isLoginStore = useIsLoginStore();
 const isSignStore = useIsLoginStore();
-
+const userStore = useUserStore();
 const isDisplay = ref('none')
 const open1 = () => {
   if(isLoginStore.data===0){
@@ -83,53 +84,61 @@ const go_meetings = () => {
     
     <text class="header">欢迎来到402房间预约小程序~</text>
 
-    <!-- <view class="uni-margin-wrap">
-      <swiper class="swiper" circular :indicator-dots="false" :autoplay="true" :interval="2000"
-      :duration="500">
-          <swiper-item>
-              <view class="swiper-item uni-bg-red">公告A</view>
-          </swiper-item>
-          <swiper-item>
-            <view class="swiper-item uni-bg-green">公告B</view>
-          </swiper-item>
-          <swiper-item>
-              <view class="swiper-item uni-bg-blue">公告C</view>
-          </swiper-item>
-      </swiper>
-    </view> -->
     <UniNoticeBar show-icon scrollable
         class="notice"
 				text="公告：武汉大学本科生院402房间的使用时间为早上9：00~晚上21：30" />
-    <!-- <view class="bg_img_box">
+    
       <image
         src="../static/home_bg.svg"
         mode="scaleToFill"
+        class="bg_img"
       />
-    </view> -->
     <view class="sign_in_box" @click="go_meetings">
-      打卡
+      <image
+        src="../static/home_sign_in.svg"
+        mode="scaleToFill"
+      />
+      <text class="words">签到</text>
     </view>
-    <!-- <view class="sign_out_box" @click="go_sign_out" v-if="isSignStore.value">
-      签退
-    </view> -->
 
-    <view class="blue">
-  
-    </view>
-    <text class="middle">主要功能</text>
+
+ 
+    
     <view class="container">
-      <view id="book" @click="open1">预约房间</view>
-      <view id="cancel" @click="open2">取消预约</view>
-      <view id="problem" @click="open3">故障报修</view>
-      <view id="suggest" @click="open4">意见反馈</view>
+      <view id="book" @click="open1">
+        <image
+          src="../static/home_book.svg"
+          mode="scaleToFill"
+        />
+      <text>预约房间</text>  
+      </view>
+      <view id="cancel" @click="open2">
+        <image
+          src="../static/home_cancel.svg"
+          mode="scaleToFill"
+        />
+        <text>
+          取消预约
+        </text>
+      </view>
+      <view id="problem" @click="open3">
+        <image
+          src="../static/home_problem.svg"
+          mode="scaleToFill"
+        />
+       <text>故障报修</text> 
+      </view>
+      <view id="suggest" @click="open4">
+        <image
+          src="../static/home_suggest.svg"
+          mode="scaleToFill"
+        />
+       <text>意见反馈</text> 
+      </view>
 
     </view>
   
     
-    <!-- <view class="prompt">
-      <view>请先登录!</view>
-      <button @click="closePrompt">确认</button>
-    </view> -->
 
 
     <view class="prompt" v-if="isLoginStore.data===0">
@@ -137,8 +146,6 @@ const go_meetings = () => {
       <view class="line"></view>
       <view class="down" @click="go_mine">确定</view>
     </view>
-
-    
 
   </view>
 </template>
@@ -181,10 +188,11 @@ color: #979797;
 }
 .notice{
   position: absolute;
-  top: calc((146 - 88)*2rpx);
+  top: 80rpx;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+  z-index: 1;
 }
 .uni-margin-wrap {
 		width: 100%;
@@ -250,68 +258,76 @@ color: #000000;
  }
 .container{
 position: absolute;
-left: 34rpx;
-top: 756rpx;
-width: 680rpx;
-height: 480rpx;
+top: 648rpx;
+width: 100vw;
+height: 730rpx;
 display: block;
 background: #FFFFFF;
-margin: 0 auto;
-border-radius: 20rpx;
+border-radius: 66rpx;
+z-index: 1;
 
 }
-.container view{
+.container>view{
   position: absolute;
-width: 278rpx;
-height: 162rpx;
-background: #C8EEFF;
+width: 300rpx;
+height: 228rpx;
+
+
+background: #F0F2FF;
 border-radius: 32rpx;
-font-family: 'Microsoft YaHei UI';
-font-style: normal;
-font-weight: 400;
-font-size: 48rpx;
-line-height: 60rpx;
-text-align: center;
-letter-spacing: -0.6rpx;
-display: flex;
-justify-content: center;
-align-items: center;
-color: #0071D9;
-
-/* Rectangle 24 */
-
-/* button/预约房间 */
-
 
 
 filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
+}
+.container>view image{
+  height: 66.66rpx;
+  width: 66.66rpx;
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  top: 46rpx;
+}
+.container>view text{
+  /* 预约房间 */
 
+position: absolute;
+left: 50%;
+translate: -50%;
+top: 152rpx;
+white-space: nowrap;
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 700;
+font-size: 40rpx;
+line-height: 140%;
 
+letter-spacing: 0.4rpx;
 
+color: #000000;
 
 
 }
+
 #book{
 position: absolute;
-left: 39rpx;
-top: 43rpx;
+left: 62rpx;
+top: 64rpx;
 }
 #cancel{
   position: absolute;
-  left:367rpx;
-  top: 43rpx;
-
+  left:396rpx;
+  top: 64rpx;
 }
 #problem{
   position: absolute;
-  left: 39rpx;
-  top: 258rpx;
+  left: 62rpx;
+  top: 334rpx;
 }
 #suggest{
   position: absolute;
-  left: 367rpx;
-  top: 258rpx;
+  left: 396rpx;
+  top: 334rpx;
 }
 .prompt{
   position: absolute;
@@ -443,39 +459,54 @@ border-radius: 32rpx;
 
 
 }
-.sign_in_box{
+.sign_in_box image{
+  height: 100rpx;
+  width: 100rpx;
   position: absolute;
-  width: 400rpx;
-  height: 400rpx;
   left: 50%;
   transform: translateX(-50%);
-  top: calc((208 - 88)*2rpx);
-  border-radius: 100%;
-  background-color: #c8eeff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 8.34rpx;
+  z-index: 3;
+}
+.sign_in_box text{
+  /* 签到 */
 
-  overflow: hidden;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top: 170rpx;
 
-  z-index: 2;
-
-  font-family: 'Microsoft YaHei UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 72rpx;
-  line-height: 92rpx;
-  text-align: center;
-  letter-spacing: -0.6rpx;
-
-  color: #000000;
-
-
-box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
-
-
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 700;
+font-size: 48rpx;
+line-height: 140%;
+letter-spacing: 0.2px;
+color: #000000;
+z-index: 3;
 
 }
+
+.sign_in_box{
+/* Rectangle 24 */
+
+position: absolute;
+
+background: rgba(240, 242, 255, 0.02);
+box-shadow: 0px 8rpx 8rpx rgba(0, 0, 0, 0.25);
+border-radius: 32rpx;
+  position: absolute;
+  width: 300rpx;
+  height: 300rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 258rpx;
+  overflow: hidden;
+  /* z-index: 2; */
+
+}
+
+
 .sign_out_box{
   position: absolute;
   width: 400rpx;
@@ -499,5 +530,18 @@ box-shadow: 4px 8px 24px rgba(36, 107, 253, 0.25);
   color: #000000;
   z-index: 1;
 }
+
+.bg_img{
+  position: absolute;
+  width: 100vw;
+  height: 662rpx;
+  top: 150rpx;
+
+}
+
+/* .bg_img_box{
+  width: 100vw;
+  height: 662rpx;
+} */
 
 </style>

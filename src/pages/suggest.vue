@@ -17,11 +17,11 @@
     let current_minute = date.getMinutes();
     let current_second = date.getSeconds();
     uni.request({
-      url:'http://127.0.0.1:4523/m1/4094679-0-default/feedback/',
+      url:'https://api.room402.temp.ziqiang.net.cn/feedback/',
       method:'POST',
       data:{
         time:`${current_y}-${current_m}-${current_d}`,
-        decription:`${input_content.value}`
+        description:`${input_content.value}`
       },
       success:(success)=>{
         console.log(success.data);

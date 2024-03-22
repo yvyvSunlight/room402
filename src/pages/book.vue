@@ -2,8 +2,10 @@
   import { onReady } from '@dcloudio/uni-app';
   import {onMounted, ref} from 'vue';
   import { getCurrentInstance } from "vue";
+  import useUserStore from "@/stores/user";
   import { http } from '@/utils/http'
   import "@/utils/http";
+  const userStore = useUserStore();
   // import { createSSRApp } from "vue";
   // let vm = createSSRApp(App)({
   //   el:'#app',
@@ -452,9 +454,9 @@
     
     const user_id = 1;
     uni.request({
-      url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id=${user_id}&date=${current_y}-0${current_m}-${current_d}`,
+      url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${current_y}-0${current_m}-${current_d}`,
       method:'POST',
-
+      headers: {'Authorization': userStore.profile.session},
       data:{
           theme:`${input_content.value}`,
           start_time:  `${year.value}-${month.value}-${day.value} ${time0_.value}`,
@@ -1047,11 +1049,11 @@ top: 630rpx;
 
 .remind_{
 position: absolute;
-left: 366rpx;
+left: 344rpx;
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 500;
-font-size: 29rpx;
+font-size: 32rpx;
 line-height: 140%;
 /* or 25px */
 letter-spacing: 0.4rpx;

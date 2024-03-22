@@ -1,10 +1,12 @@
 <script setup>
 import helper from "../../common/helper.js";
 import  useIsLoginStore  from '@/stores/isLogin';
+import  useUserStore  from "@/stores/user";
 import { onMounted, ref } from "vue";
 import '@/utils/http';
 import { get_notice_all } from '../services/get.js';
 import { onLoad } from "@dcloudio/uni-app";
+const userStore = useUserStore();
 const isLoginStore = useIsLoginStore();
 const isDisplay = ref('block') ;
 let items = ref([]);
@@ -30,7 +32,11 @@ const get_messages = () => {
     url:'https://api.room402.temp.ziqiang.net.cn/notice/all',
     method:'GET',
     success:(suc)=>{
+      console.log('susssssssssssssssss');
       console.log(suc.data);
+    },
+    fail:(fail)=>{
+      console.log('aaafail');
     },
   })
 }

@@ -6,6 +6,7 @@
 	import { http } from "@/utils/http";
 const user = useUserStore();      //得到了仓库
 console.log(user.name)
+const backend_data = ref([])
 // counter.count++
 // 自动补全！ 
 // counter.$patch({ count: counter.count + 1 })
@@ -30,19 +31,28 @@ uni.request({
 	},
 	success:(success)=>{
 		console.log(success.data);
+		backend_data.value = success.data;
+
 	},
 })
+
+
 const isDisplay = ref('none')
 time0_.value = '09:30'
 time1_.value='10:00'
 
-const f_cancel = () => {
+const f_cancel =async (e,p) => {
+	uni.request({
+		url:`https://api.room402.temp.ziqiang.net.cn/cancel/${p}`,
+		method:'DELETE',
+	})
 	
-	isDisplay.value = 'block'
-	setTimeout( () => {
-      uni.switchTab({ url: '/pages/home' });
-      isDisplay.value = 'none'
-    },1000)
+	await new Promise (() => {
+		setTimeout( () => {
+		  uni.switchTab({ url: '/pages/home' });
+		  isDisplay.value = 'none'
+		},1000)
+	})
 }
 </script>
 
@@ -54,28 +64,31 @@ const f_cancel = () => {
   <view class="bg">
 	<view class="words">
 
-		<text class="today">今天</text>
-		<text class="day">{{ month }}/{{ day }}</text>
+		
 	</view>
-	<view class="card">
-		<text class="addr">本科生院402房间</text>
-		<text class="time">{{ time0_ }}-{{ time1_ }}</text>
-		<view class="img_pos_box">
-			<image
-				src="../static/pos.svg"
-				mode="scaleToFill"
-			/>
-		</view>
-		<text class="pos_">402房间 4楼</text>
-		<view class="img_peo_box">
-			<image
-				src="../static/people.svg"
-				mode="scaleToFill"
-			/>
-		</view>
-		<text class="peo_">李丽、刘洋、我</text>
-		<button class="cancel_but" @click="f_cancel">取消预约</button>
-	</view>
+	<view class="myCard" v-for="item in backend_data">
+      <text class="when">{{ item.start_time.slice(11) }}-{{ item.end_time.slice(11) }}</text>
+      <view class="state" :color="color" >未开始</view>
+      <image
+        src="../static/pos.svg"
+        mode="scaleToFill"
+        id="pos_img"
+        class="img"
+      />
+      <image
+        src="../static/people.svg"
+        mode="scaleToFill"
+        id="peo_img"
+        class="img"
+      />
+      <text class="description" id="pos_description">
+        402房间 4楼
+      </text>
+      <text class="description" id="peo_description">
+        我
+      </text>
+      <button  @click="f_cancel(e,item.id)" class="cancel_but">取消预约</button>
+    </view>
 	
 	<view class="prompt">
       <text class="prompt_">
@@ -110,131 +123,114 @@ const f_cancel = () => {
 
 		color: #000000;
 	}
-	.card{
-		/* Rectangle 680 */
-
-position: absolute;
-width: 636rpx;
+	.myCard{
+    /* Rectangle 680 */
+position: relative;
+margin:auto;
+margin-top: 40rpx;
+/*  position: absolute; */
+width: 626rpx;
 height: 274rpx;
-left: 58rpx;
-top: calc((169 - 88)*2rpx);
+/* left: 58rpx; */
+/* top: calc(169*2rpx); */ 
 
 background: #FFFFFF;
 border-radius: 36rpx;
 
-	}
-	.addr{
+  }
+  .state{
+    position: absolute;
+    top: calc((186 - 169)*2rpx);
+    left: calc((190 - 34)*2rpx);
+    height: 44rpx;
+    width: 116rpx;
+    border-radius: 6rpx;
+    /*   ↳Label */
+    background-color: #eeeeff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Microsoft YaHei UI';
+    font-style: normal;
+    font-weight: 560;
+    font-size: 26rpx;
+    line-height: 48rpx;
+    text-align: center;
+    letter-spacing: 2rpx;
+    color: #459ff3;
+    mix-blend-mode: normal;
+
+  }
+  .when{
+    /* 09：30-10：00 */
+    width: 280rpx;
+  height: 50rpx;
+  position: absolute;
+  top: calc((184 - 169)*2rpx);
+  left: calc((45 - 37)*2rpx);
 
 position: absolute;
 width: 280rpx;
 height: 50rpx;
-left: 32rpx;
-top: 30rpx;
+/* left: 90rpx; */
+/* top: 368rpx; */
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 700;
-font-size: 32rpx;
+font-size: 30rpx;
 line-height: 48rpx;
-/* or 149% */
+/* or 159% */
 text-align: center;
 letter-spacing: 2rpx;
 
 color: #000000;
 
 
-	}
-	.time{
-		/* 09：30-10：00 */
-
-position: absolute;
-width: 166rpx;
-height: 38rpx;
-left: calc((263 - 29)*2rpx);
-top: calc((185 - 169)*2rpx);
-
-font-family: 'Microsoft YaHei UI';
-font-style: normal;
-font-weight: 400;
-font-size: 8px;
-line-height: 24px;
-/* or 298% */
-text-align: center;
-letter-spacing: 1px;
-
-color: #000000;
-
-
-	}
-	.img_pos_box{
-
-	position: absolute;
-	left: calc((45 - 29)*2rpx);
-	top: calc((221 - 169)*2rpx);
-	}
-	.img_peo_box{
-		/* 3.Icons/Outlined/group-detail */
-
-	position: absolute;
-	left: calc((45 - 29)*2rpx);
-	top: calc((251 - 169)*2rpx);
-
-
-	}
-	.img_pos_box,.img_peo_box{
-		width: 48rpx;
-		height: 48rpx;
+  }
+  #pos_img{
+    position: absolute;
+    left: calc((45 - 25)*2rpx);
+    top: calc((221 - 167)*2rpx);
+  }
+  #peo_img{
+    position: absolute;
+	left: calc((45 - 25)*2rpx);
+	top: calc((251 - 167)*2rpx);
+  }
+.img{
+    width: 32rpx;
+		height: 40.82rpx;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
+}
+.description{
+  position: absolute;
+  width: calc(79*2rpx);
+  height: calc(2*23rpx);
+  font-family: 'Microsoft YaHei UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26rpx;
+  line-height: 48rpx;
+  /* left: ; */
+  /* or 238% */
+  white-space: nowrap;
+  /* text-align: center; */
+  letter-spacing: 2rpx;
 
+  color: #979797;
+}
+#peo_description{
 
-	.pos_{
-		/* 402房间 4楼 */
-
-position: absolute;
-width: 79px;
-height: 23px;
-left: calc((75 - 29)*2rpx);
+  left: calc((75 - 28)*2rpx);
+  top: calc((251 - 169)*2rpx);
+}
+#pos_description{
+left: calc((75 - 28)*2rpx);
 top: calc((222 - 169)*2rpx);
-
-font-family: 'Microsoft YaHei UI';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 24px;
-/* or 238% */
-text-align: center;
-letter-spacing: 1px;
-
-color: #979797;
-
-
-	}
-.peo_{
-/* 李丽，刘洋，我 */
-
-position: absolute;
-width: calc(79*2rpx);
-height: calc(2*23rpx);
-left: calc((82 - 29)*2rpx);
-top: calc((251 - 169)*2rpx);
-
-font-family: 'Microsoft YaHei UI';
-font-style: normal;
-font-weight: 400;
-font-size: 20rpx;
-line-height: 48rpx;
-/* or 238% */
-text-align: center;
-letter-spacing: 2rpx;
-
-color: #979797;
-
-
-
-
 }
 .cancel_but{
 	/* Component 21 */

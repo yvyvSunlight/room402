@@ -204,7 +204,7 @@ const go_sign_out =async (e,p) => {
       })
     }
       uni.request({
-        url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id&date=${date_now.value}`,
+        url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${date_now.value}`,
         method:'GET',
         success:(success)=>{
           console.log(success.data);
@@ -304,10 +304,8 @@ border-radius: 36rpx;
     line-height: 48rpx;
     text-align: center;
     letter-spacing: 2rpx;
-
-color: #459ff3;
-
-mix-blend-mode: normal;
+    color: #459ff3;
+    mix-blend-mode: normal;
 
   }
   .when{

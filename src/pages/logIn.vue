@@ -1,7 +1,9 @@
 <script setup>
   import { ref } from "vue";
   import "@/utils/http";
+  import  useUserStore  from "@/stores/user.js";
   const isDisplay = ref('none')
+  const userStore = useUserStore();
   const wx_suc = () => {
     // isDisplay.value = 'block';
       uni.getUserProfile({
@@ -20,28 +22,31 @@
               },
               success:(success)=>{
                 console.log(success.data);
-                console.log(success);
+                userStore.setProfile({user_id:success.data.data.user_id,
+                is_first:success.data.is_first,
+              openid:success.data.data.openid,
+            session:success.data.data.session_key})
               },
             })
 
             //my
-            uni.request({
-              url:'https://api.weixin.qq.com/sns/jscode2session',
-              method:'GET',
-              data:{
-                appid:'wxbb790dfebfba6b18',
-                secret:'92ad213ff31f718a3ab140beb3db90f8',
-                js_code:params,
-                grant_type:'authorization_code',
-              },
-              success:(success)=>{
-                console.log('my');
-                console.log(success.data);
-              },
-              fail:(fail)=>{
-                console.log('fail');
-              },
-            })
+            // uni.request({
+            //   url:'https://api.weixin.qq.com/sns/jscode2session',
+            //   method:'GET',
+            //   data:{
+            //     appid:'wxbb790dfebfba6b18',
+            //    
+            //     js_code:params,
+            //     grant_type:'authorization_code',
+            //   },
+            //   success:(success)=>{
+            //     console.log('my');
+            //     console.log(success.data);
+            //   },
+            //   fail:(fail)=>{
+            //     console.log('fail');
+            //   },
+            // })
             uni.navigateTo({
               url:'/pages/choose'
             })

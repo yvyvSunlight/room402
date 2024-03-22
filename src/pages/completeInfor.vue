@@ -2,8 +2,22 @@
   import helper from '../../common/helper.js';
 	import  useRoleStore  from '@/stores/role';
 	import  useIsLoginStore  from '@/stores/isLogin';
-  import { ref } from "vue";
-
+  import { onMounted, ref } from "vue";
+  onMounted(() => {
+    uni.request({
+      url: '',
+      data: {},
+      header: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      method: 'GET',
+      sslVerify: true,
+      success: ({ data, statusCode, header }) => {},
+      fail: (error) => {}
+    })
+  })
   const isLoginStore = useIsLoginStore();
   const roleStore = useRoleStore();
   const goHome = () => {

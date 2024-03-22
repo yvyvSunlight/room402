@@ -31,11 +31,14 @@
     let current_hour = date.getHours() + 1;
     let current_minute = date.getMinutes();
     let current_second = date.getSeconds();
+    console.log(current_hour);
+    console.log(current_minute);
+    console.log(current_second);
     uni.request({
-      url:'http://127.0.0.1:4523/m1/4094679-0-default/dsyfunc/',
+      url:'https://api.room402.temp.ziqiang.net.cn/dsyfunc/',
       method:'POST',
       data:{
-        time:`${current_y}-${current_m}-${current_d} ${current_hour}:${current_minute}:${current_second}`,
+        time:`${current_y}-0${current_m}-${current_d}`,
         item:"故障报修",
         description:`${input_content.value}`
       },
