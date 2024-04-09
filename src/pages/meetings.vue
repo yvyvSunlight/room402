@@ -255,28 +255,22 @@ const go_sign_out =async (e,p) => {
 }
  
   .myCard{
-    /* Rectangle 680 */
 position: relative;
 margin:auto;
 margin-top: 40rpx;
-/*  position: absolute; */
 width: 626rpx;
 height: 274rpx;
-/* left: 58rpx; */
-/* top: calc(169*2rpx); */ 
-
 background: #FFFFFF;
 border-radius: 36rpx;
 
   }
   .state{
     position: absolute;
-    top: calc((186 - 169)*2rpx);
-    left: calc((190 - 34)*2rpx);
+    top: 34rpx;
+    left: 312rpx;
     height: 44rpx;
     width: 116rpx;
     border-radius: 6rpx;
-    /*   ↳Label */
     background-color: #eeeeff;
     display: flex;
     justify-content: center;
@@ -298,21 +292,18 @@ border-radius: 36rpx;
     width: 280rpx;
   height: 50rpx;
   position: absolute;
-  top: calc((184 - 169)*2rpx);
-  left: calc((45 - 37)*2rpx);
+  top: 30rpx;
+  left: 16rpx;
 
 position: absolute;
 width: 280rpx;
 height: 50rpx;
-/* left: 90rpx; */
-/* top: 368rpx; */
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 700;
 font-size: 30rpx;
 line-height: 48rpx;
-/* or 159% */
 text-align: center;
 letter-spacing: 2rpx;
 
@@ -322,25 +313,25 @@ color: #000000;
   }
   #pos_img{
     position: absolute;
-    left: calc((45 - 25)*2rpx);
-    top: calc((221 - 167)*2rpx);
+    left: 40rpx;
+    top: 108rpx;
   }
   #peo_img{
     position: absolute;
-	left: calc((45 - 25)*2rpx);
-	top: calc((251 - 167)*2rpx);
+	left: 40rpx;
+	top: 168rpx;
   }
 .img{
-    width: 32rpx;
-		height: 40.82rpx;
+    width: 40rpx;
+		height: 40rpx;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 }
 .description{
   position: absolute;
-  width: calc(79*2rpx);
-  height: calc(2*23rpx);
+  width: 158rpx;
+  height: 46rpx;
   font-family: 'Microsoft YaHei UI';
   font-style: normal;
   font-weight: 500;
@@ -356,12 +347,12 @@ color: #000000;
 }
 #peo_description{
 
-  left: calc((75 - 28)*2rpx);
-  top: calc((251 - 169)*2rpx);
+  left: 94rpx;
+  top: 164rpx;
 }
 #pos_description{
-left: calc((75 - 28)*2rpx);
-top: calc((222 - 169)*2rpx);
+left: 94rpx;
+top: 106rpx;
 }
 button{
   /* Rectangle 682 */
@@ -369,10 +360,10 @@ button{
 box-sizing: border-box;
 white-space: nowrap;
 position: absolute;
-top:calc((440 - 342)*2rpx);
-left:calc((269 - 29)*2rpx);
-width: calc(67*2rpx);
-height: calc(21*2rpx); 
+top:196rpx;
+left:426rpx;
+width: 134rpx;
+height: 42rpx; 
 border: 2rpx solid #DADADA;
 overflow: hidden;
 border-radius: 18rpx;

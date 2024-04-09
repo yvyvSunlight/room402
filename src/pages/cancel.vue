@@ -112,7 +112,7 @@ const f_cancel =async (e,p) => {
 		/* 今天 2/14 */
 		position: absolute;
 		left: 42rpx;
-		top: calc((107 - 88)*2rpx);
+		top: 38rpx;
 
 	}
 	.today{
@@ -125,28 +125,22 @@ const f_cancel =async (e,p) => {
 		color: #000000;
 	}
 	.myCard{
-    /* Rectangle 680 */
 position: relative;
 margin:auto;
 margin-bottom: 40rpx;
-/*  position: absolute; */
 width: 626rpx;
 height: 274rpx;
-/* left: 58rpx; */
-/* top: calc(169*2rpx); */ 
-
 background: #FFFFFF;
 border-radius: 36rpx;
 
   }
   .state{
     position: absolute;
-    top: calc((186 - 169)*2rpx);
-    left: calc((190 - 34)*2rpx);
+    top: 34rpx;
+    left: 312rpx;
     height: 44rpx;
     width: 116rpx;
     border-radius: 6rpx;
-    /*   ↳Label */
     background-color: #eeeeff;
     display: flex;
     justify-content: center;
@@ -168,8 +162,8 @@ border-radius: 36rpx;
     width: 280rpx;
   height: 50rpx;
   position: absolute;
-  top: calc((184 - 169)*2rpx);
-  left: calc((45 - 37)*2rpx);
+  top: 30rpx;
+  left: 16rpx;
 
 position: absolute;
 width: 280rpx;
@@ -192,13 +186,13 @@ color: #000000;
   }
   #pos_img{
     position: absolute;
-    left: calc((45 - 25)*2rpx);
-    top: calc((221 - 167)*2rpx);
+    left: 40rpx;
+    top: 108rpx;
   }
   #peo_img{
     position: absolute;
-	left: calc((45 - 25)*2rpx);
-	top: calc((251 - 167)*2rpx);
+	left: 40rpx;
+	top: 168rpx;
   }
 .img{
     width: 32rpx;
@@ -209,8 +203,8 @@ color: #000000;
 }
 .description{
   position: absolute;
-  width: calc(79*2rpx);
-  height: calc(2*23rpx);
+  width: 158rpx;
+  height: 46rpx;
   font-family: 'Microsoft YaHei UI';
   font-style: normal;
   font-weight: 500;
@@ -226,12 +220,12 @@ color: #000000;
 }
 #peo_description{
 
-  left: calc((75 - 28)*2rpx);
-  top: calc((251 - 169)*2rpx);
+  left: 94rpx;
+  top: 164rpx;
 }
 #pos_description{
-left: calc((75 - 28)*2rpx);
-top: calc((222 - 169)*2rpx);
+left: 94rpx;
+top: 106rpx;
 }
 .cancel_but{
 	/* Component 21 */
@@ -239,8 +233,8 @@ overflow: hidden;
 position: absolute;
 width: 134rpx;
 height: 42rpx;
-left: calc((269 - 29)*2rpx);
-top: calc((267 - 169)*2rpx);
+left: 480rpx;
+top: 196rpx;
 
 
 	/* Rectangle 682 */

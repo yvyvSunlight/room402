@@ -76,8 +76,8 @@
 
 position: absolute;
 left: 8rpx;
-top: calc((114 - 88)*2rpx);
-width: calc(106*2rpx);
+top: 52rpx;
+width: 212rpx;
 height: 64rpx;
 
 font-family: 'Microsoft YaHei UI';
@@ -97,7 +97,7 @@ color: #000000;
 
 position: absolute;
 left: 38rpx;
-top: calc((145 - 88)*2rpx);
+top: 114rpx;
 width: 656rpx;
 height: 0;
 border: 1px solid #979797;
@@ -105,11 +105,6 @@ transform: rotate(0.17deg);
 
 }
 #describe{
-  /* 请输入使用意见反馈 */
-
-/* position: absolute;
-left: 34rpx;
-top: calc((152 - 88)*2rpx); */
 
 font-family: 'Urbanist';
 font-style: normal;
@@ -126,9 +121,7 @@ color: #979797;
 
 }
 .submit{
-  /* Type=Button, Type 2=Primary, Type 3=Rounded, Style=Default, State=Active, Theme=Default, Component=Button */
 
-/* Auto layout */
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -184,7 +177,7 @@ flex-grow: 0;
 .describe_box{
   position: absolute;
   left: 34rpx;
-  top: calc((152 - 84)*2rpx);
+  top: 136rpx;
   height: 100rpx;
   
 }

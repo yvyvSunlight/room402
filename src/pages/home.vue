@@ -89,7 +89,7 @@ const go_meetings = () => {
 				text="公告：武汉大学本科生院402房间的使用时间为早上9：00~晚上21：30" />
     
       <image
-        src="../static/home_bg.svg"
+        src="../static/home_bg.png"
         mode="scaleToFill"
         class="bg_img"
       />
@@ -336,17 +336,17 @@ top: 64rpx;
   left: 50%; 
   transform: translateX(-50%);
   top: 400rpx;
-  width: calc(365*2rpx);
-  height: calc(175*2rpx);
+  width: 730rpx;
+  height: 350rpx;
   border-radius: 30rpx;
   background: #FFFBFB;
   z-index: 4;
 }
 .line{
-  width: calc(365*2rpx);
+  width: 730rpx;
   height: 0;
   position: absolute;
-  top: calc(118*2rpx);
+  top: 236rpx;
   border: 2rpx solid #E1E1E1;
   transform: rotate(0.16deg);
   display: flex;
@@ -375,9 +375,9 @@ top: 64rpx;
 }
 .down{
   position: absolute;
-  width: calc(365*2rpx);
-  height: calc((175 - 118)*2rpx);
-  top: calc(118*2rpx);
+  width: 730rpx;
+  height: 114rpx;
+  top: 236rpx;
   overflow: hidden;
 
   font-family: 'Microsoft YaHei UI';
@@ -516,7 +516,7 @@ border-radius: 32rpx;
   height: 400rpx;
   left: 50%;
   transform: translateX(-50%);
-  top: calc((208 - 88)*2rpx);
+  top: 240rpx;
   border-radius: 200rpx;
   background-color: #c8eeff;
   display: flex;

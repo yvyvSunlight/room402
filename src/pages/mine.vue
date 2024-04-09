@@ -179,24 +179,24 @@ console.log(isLoginStore.data);
 
 position: absolute;
 left: 44rpx;
-top: calc((112 - 88)*2rpx);
-width: calc(81*2rpx);
-height: calc(81*2rpx);
+top: 48rpx;
+width: 162rpx;
+height: 162rpx;
 display: flex;
 justify-content: center;
 align-items: center;
 
 }
 .image{
-  width: calc(81*2rpx);
-  height: calc(81*2rpx);
+  width: 162rpx;
+  height: 162rpx;
 }
 
 .department,.name{
   /* 张三 198****8110 */
 
 position: absolute;
-left: calc(117*2rpx);
+left: 234rpx;
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
@@ -210,13 +210,13 @@ color: #000000;
 
 }
 .name{
-  top: calc((125 - 88)*2rpx);
+  top: 74rpx;
 }
 .department{
   top:140rpx;
 }
 .bar{
-  height: calc(52*2rpx);
+  height: 104rpx;
   width: 100vw;
   
   
@@ -226,8 +226,8 @@ color: #000000;
   /* Group */
 
 position: absolute;
-width: calc(20*2rpx);
-height: calc(20*2rpx);
+width: 40rpx;
+height: 40rpx;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -240,13 +240,11 @@ justify-content: center;
 }
 .key_sg{
   left: 680rpx;
-  top: calc((119 - 70)*2rpx);
+  top: 98rpx;
 }
 
 .container1{
   position: relative;
-  /* position: absolute; */
-  /* top: calc((246 - 88)*2rpx); */
   height: fit-content;
   width: 100vw;
   background-color: #fff;
@@ -260,16 +258,6 @@ left: 126rpx;
 top: 50%;
 transform: translateY(-50%);
 
-
-/* font-weight: 400; */
-/* font-size: 40rpx; */
-/* line-height: 50rpx; */
-/* letter-spacing: -0.6rpx; */
-
-/* color: #000000; */
-
-
-
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 700;
@@ -279,17 +267,12 @@ line-height: 140%;
 display: flex;
 align-items: center;
 letter-spacing: 0.4rpx;
-
-/* Greyscale / 900 */
 color: #212121;
-
-
-/* Inside auto layout */
 flex: none;
 order: 1;
 flex-grow: 1;
-
 }
+
 .bar{
   position: relative;
 }
@@ -299,8 +282,6 @@ flex-grow: 1;
 position: relative;
 width: 600rpx;
 left: 100rpx;
-
-
 border-top: 2rpx solid #d7d7d7;
 transform: matrix(1, 0, 0, 1, 0, 0);
 }
@@ -339,8 +320,8 @@ transform: matrix(1, 0, 0, 1, 0, 0);
   
 }
 .container{
-  width: calc(80*2rpx);
-  height: calc(72*2rpx);
+  width: 160rpx;
+  height: 144rpx;
   position: absolute;
 left: 39.47%;
 right: 39.2%;
@@ -348,34 +329,28 @@ top: 16.13%;
 bottom: 75%;
 
 background: rgba(237, 237, 237, 0.9);
-border-radius: calc(11*2rpx);
+border-radius: 22rpx;
 display: flex;
 justify-content: center;
 align-items: center;
 }
 image{
-width: calc(58*2rpx);
-height: calc(53*2rpx);
+width: 116rpx;
+height: 106rpx;
 
 
 }
 .button{
-  width: calc(352*2rpx);
-  height: calc(52.72*2rpx);
-  /* Rectangle 210 */
-
-
-
+  width: 704rpx;
+  height: 105.44rpx;
 position: absolute;
 left: 5.33%;
 right: 4%;
 top: 40.02%;
 bottom: 53.48%;
 
-
-
 background: #99DBFD;
-border-radius: calc(38*2rpx);
+border-radius: 76rpx;
 
 display: flex;
 justify-content: center;
@@ -385,7 +360,7 @@ align-items: center;
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 700;
-font-size: calc(20*2rpx);
+font-size: 40rpx;
 line-height: 108.1%;
 /* or 22px */
 text-align: center;

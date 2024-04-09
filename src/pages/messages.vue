@@ -186,10 +186,8 @@ border-radius: 32rpx;
 }
 
 .card{
-
-
-width: calc(324*2rpx);
-height: calc(85*2rpx);
+width: 648rpx;
+height: 170rpx;
 position: relative;   
 margin: 40rpx auto;
 background: #FFFFFF;
@@ -204,7 +202,7 @@ overflow: hidden;
   /* 3.Icons/Filled/arrow */
 
 position: absolute;
-left: calc((285.12)*2rpx);
+left: 570.24rpx;
 top: 98rpx;
 
 
@@ -262,8 +260,8 @@ top: 22rpx;
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
 font-weight: 400;
-font-size: 12px;
-line-height: 15px;
+font-size: 24rpx;
+line-height: 30rpx;
 text-align: center;
 letter-spacing: -0.3px;
 
@@ -299,17 +297,17 @@ color: #6D6D6D;
   left: 50%; 
   transform: translateX(-50%);
   top: 310rpx;
-  width: calc(365*2rpx);
-  height: calc(175*2rpx);
+  width: 730rpx;
+  height: 350rpx;
   border-radius: 30rpx;
   background: #FFFBFB;
   z-index: 4;
 }
 .line_prompt{
-  width: calc(365*2rpx);
+  width: 730rpx;
   height: 0;
   position: absolute;
-  top: calc(118*2rpx);
+  top: 236rpx;
   border: 2rpx solid #E1E1E1;
   transform: rotate(0.16deg);
   display: flex;
@@ -338,9 +336,9 @@ color: #6D6D6D;
 }
 .down{
   position: absolute;
-  width: calc(365*2rpx);
-  height: calc((175 - 118)*2rpx);
-  top: calc(118*2rpx);
+  width: 730rpx;
+  height: 114rpx;
+  top: 236rpx;
   overflow: hidden;
 
   font-family: 'Microsoft YaHei UI';

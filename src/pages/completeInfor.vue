@@ -218,13 +218,13 @@ line-height: 34rpx;
   left: 256rpx;
   height: 140rpx;
   width: 184rpx;
-  top:calc((314 - 60)*2rpx);
+  top:508rpx;
   /* top: 524rpx; */
   overflow: hidden;
 }
 .proof{
   /* top: 524rpx; */
-  top:calc((314 - 60)*2rpx);
+  top:508rpx;
 }
 .code_,.code{
   top: 708rpx;

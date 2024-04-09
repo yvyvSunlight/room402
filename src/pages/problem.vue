@@ -89,7 +89,7 @@
 
 
     <view class="describe_box">
-      <textarea name="describe" id="describe" cols="30" rows="10" placeholder="请输入故障描述（字数100字以内）" auto-height="false" @input="f_input"></textarea>
+      <textarea name="describe" id="describe" cols="30" rows="10" maxlength="101" placeholder="请输入故障描述（字数100字以内）" auto-height="false" @input="f_input"></textarea>
 
     </view>
 
@@ -190,20 +190,17 @@ color: #979797;
 
 #describe{
   /* 请输入故障描述（字数100字以内） */
-
 height: 200rpx;
-/* height: fit-content; */
-/* overflow: auto; */
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 400;
-font-size: 26rpx;
+font-size: 28rpx;
 line-height: 140%;
 /* or 18px */
 display: flex;
 letter-spacing: 0.4rpx;
 
-color: rgba(151, 151, 151, 0.79);
+color: black;
 
 
 }
@@ -310,7 +307,7 @@ color: #000000;
 
 position: absolute;
 left: 70rpx;
-top: calc((234 - 68)*2rpx);
+top: 332rpx;
 display: flex;
 justify-content: center;
 align-items: center;

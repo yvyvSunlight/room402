@@ -232,53 +232,20 @@
 
   }
 
-  // const f_2 = () => {
-  //   f_clear();
-  //   for(let i = 1;i >= 0 ;i--){
-  //     dataSet[i].value = 'none'
-  //   }
-  // }
-
   dataSet[1].value = 'none'
   console.log(dataSet);
   const f_start_time = () => {
-    // for(let i = 0; i <= pt; i++){
-    // dataSet[i].value = 'block'
-    // }
     scroll_tab_top.value = '450rpx'
     tab_disp.value = 'block'
-    // pt = -1;
-    // console.log(dataSet);
     flag = 0;
   }
   const f_end_time = () => {
-    // console.log(pt);
-    // for(let i = pt; i >= 0; i--){
-    //   dataSet[i].value = 'none';
-    //   console.log('test');
-    // }
-    scroll_tab_top.value = 'calc((242 + 25)*2rpx)'
+    scroll_tab_top.value = '534rpx'
     tab_disp.value = 'block';
-    // console.log(dataSet[1].value);
     flag = 1;
   }
 
-  // onMounted(() => {
-  //   const instance = getCurrentInstance();
-  //   const query = uni.createSelectorQuery().in(instance);
-  
-  //   query
-  //       .selectAll(".scroll-item")
-  //       .boundingClientRect((data) => {
-  //         console.log(data);
-  //         console.log(data[0]);
-  //         data[0].display = 'none';
-  //         console.log(data[0].display);
-          
-          
-  //       })
-  //       .exec();
-  // });
+
 
 
   const day = ref(current_d)
@@ -686,7 +653,7 @@
   z-index: 3;
   background-color: #fff;
   position: absolute;
-  left:calc((312 - 90)*2rpx);
+  left:444rpx;
   top: v-bind(scroll_tab_top);
   overflow-y: scroll;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -717,9 +684,9 @@
   /* 本科生院402 */
 
 position: absolute;
-width: calc(147*2rpx);
+width: 294rpx;
 height: 44rpx;
-left: calc(160*2rpx);
+left: 320rpx;
 top: 828rpx;
 white-space: nowrap;
 font-family: 'Urbanist';
@@ -1183,11 +1150,11 @@ flex-grow: 0;
   /* Frame 9 */
 
 position: absolute;
-top: calc((193)*2rpx);
+top: 386rpx;
 
-left:calc((311 - 295)*2rpx);
-min-width: calc(295*2rpx);
-height: calc(146*2rpx);
+left:32rpx;
+min-width: 590rpx;
+height: 292rpx;
 width: fit-content;
 background: #FFFFFF;
 box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
@@ -1251,7 +1218,7 @@ left: 86rpx;
 overflow: hidden;
 }
 #upMonth,#downMonth{
-  left: calc(138*2rpx);
+  left: 276rpx;
 }
 #upDay,#downDay{
   left: 460rpx;
@@ -1273,7 +1240,7 @@ overflow: hidden;
   height: fit-content;
   width: 468rpx;
   top: 814rpx;
-  left: calc((312 - 234)*2rpx);
+  left: 156rpx;
   z-index: 3;
 
   display: v-bind(select_reminder_diplay);

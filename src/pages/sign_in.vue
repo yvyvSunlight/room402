@@ -130,7 +130,7 @@ const f_test2  = () => {
 #map{
   position: absolute;
   left: 52rpx;
-  top: calc((414 - 88)*2rpx);
+  top: 652rpx;
 }
 .title{
   /* 签到成功 */

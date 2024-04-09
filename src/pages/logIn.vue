@@ -208,7 +208,7 @@ color: #F6F1FB;
 position: absolute;
 left: 50%;
 transform: translateX(-50%);
-top: calc((406 - 88)*2rpx);
+top: 636rpx;
 
 font-family: 'Microsoft YaHei UI';
 font-style: normal;
@@ -232,7 +232,7 @@ color: #A1A4B2;
 position: absolute;
 left: 50%;
 transform: translateX(-50%);
-top:calc((323 - 88)*2rpx);
+top:470rpx;
 
 filter: drop-shadow(0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25));
 

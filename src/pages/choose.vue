@@ -95,8 +95,8 @@ image{
   width: 90rpx;
   height: 90rpx;
   position: absolute;
-  left: calc((293 - 30)*2rpx);
-  top: calc((194 - 158)*2rpx);
+  left: 526rpx;
+  top: 72rpx;
 }
 button text{
   /* 我是学生社团管理人员 */
