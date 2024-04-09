@@ -45,12 +45,10 @@ const f_cancel =async (e,p) => {
     isDisplay.value = 'block';
     },
 	})
-	await new Promise (() => {
 		setTimeout( () => {
 		  uni.switchTab({ url: '/pages/home' });
 		  isDisplay.value = 'none'
 		},1000)
-	})
 }
 </script>
 
