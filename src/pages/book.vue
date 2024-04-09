@@ -371,7 +371,6 @@
     console.log(input_content.value);
     isDisplay.value = 'block';
     console.log(userStore.profile.openid);
-    const user_id = 1;
     uni.request({
       url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${current_y}-0${current_m}-${current_d}`,
       method:'POST',
@@ -787,16 +786,9 @@ letter-spacing: 0.4rpx;
 color: #212121;
 
 
-/* Inside auto layout */
-/* flex: none;
-order: 1;
-flex-grow: 0; */
-
 }
 .key{
-  /* Iconly/Light/Arrow - Right 2 */
-
-/* Iconly/Light/Arrow - Right 2 */
+ 
 
 width: 40rpx;
 height: 40rpx;

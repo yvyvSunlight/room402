@@ -106,11 +106,9 @@ const judge_sign_out = () => {
   });
 }
 const loading = () => {
-  return new Promise((resolve) =>{
     uni.showLoading({
     title: '定位中...',
     mask: true,
-  })
   })
 }
 const go_sign_in = (e,p) => {

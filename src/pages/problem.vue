@@ -38,7 +38,7 @@
       url:'https://api.room402.temp.ziqiang.net.cn/dsyfunc/',
       method:'POST',
       data:{
-        time:`${current_y}-0${current_m}-${current_d}`,
+        time:`${current_y}-${current_m}-${current_d}`,
         item:"故障报修",
         description:`${input_content.value}`
       },
@@ -69,9 +69,7 @@
   const f_input = (e) => {
     input_content.value = e.target.value;
     console.log (e.target.value);
-    console.log('sus')
     console.log(input_content.value)
-    console.log('sss2')
   }
 
 
