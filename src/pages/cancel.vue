@@ -9,11 +9,6 @@
 const user = useUserStore();      //得到了仓库
 console.log(user.name)
 const backend_data = ref([])
-// counter.count++
-// 自动补全！ 
-// counter.$patch({ count: counter.count + 1 })
-// 或使用 action 代替
-// counter.increment()
 let date = new Date();
 let current_m = date.getMonth() + 1;
 let current_d = date.getDate();
@@ -46,8 +41,10 @@ const f_cancel =async (e,p) => {
 	uni.request({
 		url:`https://api.room402.temp.ziqiang.net.cn/cancel/${p}`,
 		method:'DELETE',
+    success:(success)=>{
+    isDisplay.value = 'block';
+    },
 	})
-	
 	await new Promise (() => {
 		setTimeout( () => {
 		  uni.switchTab({ url: '/pages/home' });

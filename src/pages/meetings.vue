@@ -44,14 +44,14 @@ const rad = (d) => {
         // distance.value = s
         return s;
       }
-const f_in_sus =async () => {
-      await uni.redirectTo({
+const f_in_sus =() => {
+      uni.redirectTo({
             url:'/pages/sign_in'
           })
   
 }
-const f_out_sus =async () => {
-      await uni.redirectTo({
+const f_out_sus = () => {
+       uni.redirectTo({
             url:'/pages/sign_out'
           })
 }
@@ -113,9 +113,8 @@ const loading = () => {
   })
   })
 }
-const go_sign_in = async (e,p) => {
+const go_sign_in = (e,p) => {
   loading();
-  await new Promise(() => {
     judge_sign_in(); 
     uni.request({
       url:`https://api.room402.temp.ziqiang.net.cn/sign/${p}`,
@@ -130,15 +129,11 @@ const go_sign_in = async (e,p) => {
         console.log(success.data);
       },
     })
-  });
-  // await new Promise
-  
 }
 
 
-const go_sign_out =async (e,p) => {
+const go_sign_out =(e,p) => {
   loading();
-  await new Promise(() => {
     judge_sign_out();
     uni.request({
       url:`https://api.room402.temp.ziqiang.net.cn/sign/${p}`,
@@ -150,7 +145,6 @@ const go_sign_out =async (e,p) => {
         validator:1
       }
     })
-  })
 }
 
 

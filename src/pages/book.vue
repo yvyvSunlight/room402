@@ -6,18 +6,7 @@
   import { http } from '@/utils/http'
   import "@/utils/http";
   const userStore = useUserStore();
-  // import { createSSRApp } from "vue";
-  // let vm = createSSRApp(App)({
-  //   el:'#app',
-  //   method:{
 
-  //     f_s_t : function(e,p){
-  //      console.log(p);
-  //    }
-
-  //   }
-  // })
-  // new Vue 
 
   let date = new Date();
   let current_y = date.getFullYear();
@@ -27,33 +16,10 @@
   let pt = -1
   const scroll_tab_top = ref('450rpx')
   const tab_disp = ref('none')
-  const d_0 = ref('block')
-  const d_1 = ref('block')
-  const d_2 = ref('block')
-  const d_3 = ref('block')
-  const d_4 = ref('block')
-  const d_5 = ref('block')
-  const d_6 = ref('block')
-  const d_7 = ref('block')
-  const d_8 = ref('block')
-  const d_9 = ref('block')
-  const d_10 = ref('block')
-  const d_11 = ref('block')
-  const d_12 = ref('block')
-  const d_13 = ref('block')
-  const d_14 = ref('block')
-  const d_15 = ref('block')
-  const d_16 = ref('block')
-  const d_17 = ref('block')
-  const d_18 = ref('block')
-  const d_19 = ref('block')
-  const d_20 = ref('block')
-  const d_21 = ref('block')
   let flag = 0;
-
   const time0_ = ref('9:00');
   const time1_ = ref('10:30');
-  let dataSet = [d_0,d_1,d_2,d_3];
+
 
   const f_select_time = (e,p) => {
     f_clear();
@@ -232,8 +198,6 @@
 
   }
 
-  dataSet[1].value = 'none'
-  console.log(dataSet);
   const f_start_time = () => {
     scroll_tab_top.value = '450rpx'
     tab_disp.value = 'block'
@@ -286,14 +250,12 @@
     switch(month.value){
       case 2:
         if(leap){
-          // day.value = (day.value + 1 + parseInt(day.value/29)) % 30 ;
           if(day.value === 29){
             day.value = 1
           }else{
             day.value ++;
           }
         }else{
-          // day.value = (day.value + 1 + parseInt(day.value/28)) % 29 ;
           if(day.value === 28){
             day.value = 1;
           }else{
@@ -308,7 +270,6 @@
       case 8:
       case 10:
       case 12:
-        // day.value = (day.value + 1) % 32 + parseInt(day.value / 31);
         if(day.value === 31){
           day.value = 1;
         }else{
@@ -316,7 +277,6 @@
         }
         break;
       default:
-        // day.value = (day.value + 1) % 31 + parseInt(day.value / 30);
         if(day.value === 30){
           day.value = 1;
         }else{
@@ -329,14 +289,12 @@
     switch(month.value){
       case 2:
         if(leap){
-          // day.value = (day.value - 1 - parseInt(1/day.value)) % 30;
           if(day.value === 1){
             day.value = 29;
           }else{
             day.value --;
           }
         }else{
-          // day.value = (day.value - 1 - parseInt(1/day.value)) % 29 ;
           if(day.value === 1){
             day.value = 28;
           }else{
@@ -351,7 +309,6 @@
       case 8:
       case 10:
       case 12:
-        // day.value = (day.value - 1 -parseInt(1/day.value)) % 31;
         if(day.value === 1){
           day.value = 31;
         }else{
@@ -359,7 +316,6 @@
         }
         break;
       default:
-        // day.value = (day.value - 1 -parseInt(1/day.value)) %30;
         if(day.value === 1){
           day.value = 30;
         }else{
@@ -372,7 +328,6 @@
 
 
   const upMonth = () => {
-    // month.value = (month.value + 1 + parseInt(month/12)) % 13;
     if(month.value === 12){
       month.value = 1;
     }else{
@@ -383,7 +338,6 @@
 
 
   const downMonth = () => {
-    // month.value = (month.value - 1 - parseInt(1/month)) % 13;
     if(month.value === 1){
       month.value = 12;
     }else{
@@ -398,9 +352,7 @@
   }
 
   const downYear = () => {
-    // if(year > 2024){
       year.value = year.value-1;
-    // }
   }
 
   
@@ -433,8 +385,6 @@
           user:`${userStore.profile.user_id}`,
           name:'张三',
           student_id:2023302100001
-          // user_id:'1',
-          // date:`${year.value}-${month.value}-${day.value}`,
       },
       success:(res)=>{
         console.log(res.data);
@@ -576,7 +526,6 @@
     </view>
     <view class="linedown"></view>
 
-    <!-- <text class="options">会议选项</text> -->
     <view class="remind_v">
       <text class="remind">会议提醒</text>
       <text class="remind_">{{ remind_input }}</text>
@@ -599,11 +548,6 @@
       会议地点
     </text>
     <view class="place_">本科生院402房间</view>
-    <!-- <image
-      src="../static/book_content.png"
-      mode="scaleToFill"
-      class="book_content"
-    /> -->
 
     <button class="book" @click="f_prompt">预约</button>
     <view class="prompt">
@@ -718,15 +662,10 @@ font-style: normal;
 font-weight: 700;
 font-size: 40rpx;
 line-height: 120%;
-/* identical to box height, or 24px */
 display: flex;
 align-items: center;
-
-/* Greyscale / 900 */
 color: #212121;
 
-
-/* Inside auto layout */
 flex: none;
 order: 0;
 align-self: stretch;
@@ -755,21 +694,17 @@ flex-grow: 0;
 
 }
 .lineup,.linedown{
-  /* Line */
 
-/* Theme=Light Divider */
 
 width: 760rpx;
 height: 0rpx;
 position: absolute;
 
-/* Inside auto layout */
 flex: none;
 order: 1;
 flex-grow: 0;
 
 
-/* Greyscale / 200 */
 border: 1px solid #EEEEEE;
 
 }
@@ -808,11 +743,7 @@ flex-grow: 0;
 width: 320rpx;
 height: 50rpx;
 
-/* body / xlarge / semibold
 
-Previous style:
-body/xlarge/semibold
-*/
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 600;

@@ -3,14 +3,11 @@
 	import  useRoleStore  from '@/stores/role';
 	import  useIsLoginStore  from '@/stores/isLogin';
   import { onMounted, ref } from "vue";
-  import useUserStore from "@/stores/user";
   import useUserInfoStore from "@/stores/userInfo";
   const userInfoStore = useUserInfoStore();
   const depart_set = ref([]);
-  const userStore = useUserStore();
-// console.log(userInfoStore);
-// console.log(useUserInfoStore);
-  // onMounted(() => {
+
+
     uni.request({
       url: 'https://api.room402.temp.ziqiang.net.cn/depart',
       header: {
@@ -28,7 +25,7 @@
       },
       fail: (error) => {}
     })
-  // })
+
   uni.request({
     url:'https://api.room402.temp.ziqiang.net.cn/club',
     method:'GET',
@@ -46,21 +43,7 @@
     })
     return;
   }
-  // uni.request(
-  //   {
-  //     url:'https://api.room402.temp.ziqiang.net.cn/api/sign',
-  //     method:'POST',
-  //     data:{
-  //       name:``,
-  //       user_id:`${userStore.profile.user_id}`,
-  //       student_id:`${}`,
-  //       depart_id:``,
-  //       club_id:``,
-  //       role:``
-  //     }
 
-  //   }
-  // )
     if(roleStore.data == 'manager'){
       uni.switchTab({
         url:'/pages/mine',
