@@ -4,6 +4,8 @@
 	import  useUserStore  from '@/stores/user'
 	import '../utils/http.js';
 	import { http } from "@/utils/http";
+
+  const userStore = useUserStore();
 const user = useUserStore();      //得到了仓库
 console.log(user.name)
 const backend_data = ref([])
@@ -26,13 +28,12 @@ const time1_ = ref('')
 uni.request({
 	url:'https://api.room402.temp.ziqiang.net.cn/cancel/',
 	method:'GET',
-	data:{
-		user_id:'1'
-	},
+  header:{
+    'Authorization': userStore.profile.openid,
+  },
 	success:(success)=>{
 		console.log(success.data);
 		backend_data.value = success.data;
-
 	},
 })
 
@@ -62,10 +63,7 @@ const f_cancel =async (e,p) => {
 
 <template>
   <view class="bg">
-	<view class="words">
 
-		
-	</view>
 	<view class="myCard" v-for="item in backend_data">
       <text class="when">{{ item.start_time.slice(11) }}-{{ item.end_time.slice(11) }}</text>
       <view class="state" :color="color" >未开始</view>
@@ -102,7 +100,10 @@ const f_cancel =async (e,p) => {
 <style scoped>
 .bg{
 	width: 100vw;
-	height: 100vh;
+  min-height: 100vh;
+	height: 100%;
+  padding-top:40rpx;
+  padding-bottom: 30rpx;
 	background-color: #ededed;
 }
 	.words{
@@ -127,7 +128,7 @@ const f_cancel =async (e,p) => {
     /* Rectangle 680 */
 position: relative;
 margin:auto;
-margin-top: 40rpx;
+margin-bottom: 40rpx;
 /*  position: absolute; */
 width: 626rpx;
 height: 274rpx;

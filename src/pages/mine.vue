@@ -31,9 +31,9 @@ const go_aboutUs = () => {
     url:'/pages/aboutUs'
   })
 }
-const go_cancel = () => {
+const go_meetings = () => {
   uni.navigateTo({
-    url:'/pages/cancel'
+    url:'/pages/meetings'
   })
 }
 console.log(isLoginStore.data);
@@ -102,7 +102,7 @@ console.log(isLoginStore.data);
             class="logo"
           />
           <text>预约记录</text>
-          <view class="key_box" @click="go_cancel">
+          <view class="key_box" @click="go_meetings">
             <image
               src="../static/key.svg"
               mode="scaleToFill"

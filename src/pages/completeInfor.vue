@@ -3,10 +3,16 @@
 	import  useRoleStore  from '@/stores/role';
 	import  useIsLoginStore  from '@/stores/isLogin';
   import { onMounted, ref } from "vue";
-  onMounted(() => {
+  import useUserStore from "@/stores/user";
+  import useUserInfoStore from "@/stores/userInfo";
+  const userInfoStore = useUserInfoStore();
+  const depart_set = ref([]);
+  const userStore = useUserStore();
+// console.log(userInfoStore);
+// console.log(useUserInfoStore);
+  // onMounted(() => {
     uni.request({
-      url: '',
-      data: {},
+      url: 'https://api.room402.temp.ziqiang.net.cn/depart',
       header: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -14,9 +20,21 @@
       },
       method: 'GET',
       sslVerify: true,
-      success: ({ data, statusCode, header }) => {},
+      success: ({ data, statusCode, header }) => {
+        console.log(data.data);
+        depart_set.value = data.data;
+        console.log(depart_set.value[0].id);
+        console.log('--------------------------------');
+      },
       fail: (error) => {}
     })
+  // })
+  uni.request({
+    url:'https://api.room402.temp.ziqiang.net.cn/club',
+    method:'GET',
+    data:{
+      depart_id:1
+    }
   })
   const isLoginStore = useIsLoginStore();
   const roleStore = useRoleStore();
@@ -28,6 +46,21 @@
     })
     return;
   }
+  // uni.request(
+  //   {
+  //     url:'https://api.room402.temp.ziqiang.net.cn/api/sign',
+  //     method:'POST',
+  //     data:{
+  //       name:``,
+  //       user_id:`${userStore.profile.user_id}`,
+  //       student_id:`${}`,
+  //       depart_id:``,
+  //       club_id:``,
+  //       role:``
+  //     }
+
+  //   }
+  // )
     if(roleStore.data == 'manager'){
       uni.switchTab({
         url:'/pages/mine',
@@ -63,6 +96,35 @@
   const change = () => {
     checked = true;
   }
+  // const f_input_name = (e) => {
+    
+  //   // userInfoStore.profile.name = e.target.value;
+  //   // userInfoStore.value.setProfile({name:e.target.value})
+  //   userInfoStore.name.value = e.target.value
+  //   console.log(userInfoStore.name.value);
+  // }
+  // const f_input_number = (e) => {
+  //   // userInfoStore.profile.number = e.target.value;
+  //   userInfoStore.number.value = e.target.value
+  //   // userInfoStore.setProfile({number:e.target.value})
+  //   console.log (e.target.value);
+  //   console.log(input_content.value);
+  // }
+  // const f_input_depart = (e) => {
+  //   // userInfoStore.profile.depart = e.target.value;
+  //   userInfoStore.depart.value = e.target.value
+  //   // userInfoStore.setProfile({depart:e.target.value})
+  //   console.log (e.target.value);
+  //   console.log(input_content.value)
+  // }
+  // const f_input_club = (e) => {
+  //   // userInfoStore.profile.club = e.target.value;
+  //   userInfoStore.club = e.target.value
+  //   // userInfoStore.setProfile({club:e.target.value})
+  //   console.log (e.target.value);
+  //   console.log(input_content.value)
+  // }
+  // console.log(userInfoStore.profile);
 </script>
 <template>
   <view class="bg">
@@ -74,11 +136,11 @@
       <text class="department">部门：</text>
      
     <!-- </view> -->
-    <input type="text" class="name_">
-    <input type="text" class="number_">
+    <input type="text" class="name_" @input="f_input_name">
+    <input type="text" class="number_" @input="f_input_number">
     <!-- <input type="text" class="phone_"> -->
-    <input type="text" class="club_">
-    <input type="text" class="department_">
+    <input type="text" class="club_" @input="f_input_depart">
+    <input type="text" class="department_" @input="f_input_club">
     <view type="text" class="proof_" :disabled="true" @click="uploadPhoto">
       <image
         class="photo_show"
@@ -156,13 +218,13 @@ line-height: 34rpx;
   left: 256rpx;
   height: 140rpx;
   width: 184rpx;
-  top:calc((314 - 88)*2rpx);
+  top:calc((314 - 60)*2rpx);
   /* top: 524rpx; */
   overflow: hidden;
 }
 .proof{
   /* top: 524rpx; */
-  top:calc((314 - 88)*2rpx);
+  top:calc((314 - 60)*2rpx);
 }
 .code_,.code{
   top: 708rpx;
@@ -258,7 +320,7 @@ color: #FFFFFF;
 
 position: absolute;
 left: 318rpx;
-top:490rpx;
+top:550rpx;
 width: 62rpx;
 height: 62rpx;
 

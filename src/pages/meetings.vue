@@ -3,35 +3,12 @@
     import { onMounted, ref } from "vue";
     import logIn from './logIn.vue';
     import { onLoad } from '@dcloudio/uni-app';
+    import useUserStore from '@/stores/user';
+    const userStore = useUserStore();
     onMounted(() => {
       
     })
-    // 微信 - 获取权限
-    // function getAuthorizeInfo() {
-    //     uni.authorize({
-    //         scope: "scope.userLocation",
-    //         success(res) {
-    //             getLocationInfo();
-    //         },
-    //         fail(err) {
-    //             uni.showModal({
-    //                 content: "检测到您没打开获取定位功能权限，是否去设置打开？",
-    //                 confirmText: "确认",
-    //                 cancelText: "取消",
-    //                 success: function(res) {
-    //                     if (res.confirm) {
-    //                         uni.openSetting({
-    //                             success() {
-    //                                 getLocationInfo();
-    //                             }
-    //                         })
-    //                     }
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
-    // getAuthorizeInfo();
+    
     onMounted(() => {
       uni.getLocation({
     type: 'gcjo2',
@@ -186,8 +163,10 @@ const go_sign_out =async (e,p) => {
     let current_d = date.getDate();
     const year = ref(current_y);
     const month = ref(current_m);
+    month.value = month.value < 10 ? '0' + month.value : month.value;
     const day = ref(current_d);
-    const date_now = ref(`${year.value}-0${month.value}-${day.value}`)
+    day.value = day.value < 10 ? '0' + day.value : day.value;
+    const date_now = ref(`${year.value}-${month.value}-${day.value}`)
     const date_str = date_now;
     const data_backend = ref();
     const f_change = (e) => {
@@ -195,20 +174,26 @@ const go_sign_out =async (e,p) => {
       console.log(date_str.value);
       console.log(e);
       uni.request({
-        url:`https://api.room402.temp.ziqiang.net.cn/reservation/?user_id&date=${e}`,
+        url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${e}`,
         method:'GET',
+        header:{
+          'Authorization': userStore.profile.openid,
+        },
         success:(success)=>{
           console.log(success.data);
           data_backend.value = success.data;
+          console.log(data_backend.value);
         },
       })
     }
       uni.request({
         url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${date_now.value}`,
+        header:{'Authorization': userStore.profile.openid,},
         method:'GET',
         success:(success)=>{
           console.log(success.data);
           data_backend.value = success.data;
+          console.log(data_backend.value);
         },
       })
       console.log(data_backend.value);

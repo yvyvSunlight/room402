@@ -93,7 +93,7 @@ const go_meetings = () => {
         mode="scaleToFill"
         class="bg_img"
       />
-    <view class="sign_in_box" @click="go_meetings">
+    <view class="sign_in_box" @click="go_meetings" blurEffect="light">
       <image
         src="../static/home_sign_in.svg"
         mode="scaleToFill"
@@ -155,7 +155,9 @@ const go_meetings = () => {
 <style scoped>
 .content{
   width: 100vw;
-  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+
   background-color: #f5f5f5;
 }
 .header{
@@ -171,7 +173,6 @@ font-size: 24rpx;
 line-height: 30rpx;
 text-align: center;
 letter-spacing: -0.6rpx;
-
 color: #979797;
   
 }
@@ -260,7 +261,8 @@ color: #000000;
 position: absolute;
 top: 648rpx;
 width: 100vw;
-height: 730rpx;
+/* height: 730rpx; */
+height: calc(100vh - 730rpx);
 display: block;
 background: #FFFFFF;
 border-radius: 66rpx;
@@ -333,7 +335,7 @@ top: 64rpx;
   position: absolute;
   left: 50%; 
   transform: translateX(-50%);
-  top: 310rpx;
+  top: 400rpx;
   width: calc(365*2rpx);
   height: calc(175*2rpx);
   border-radius: 30rpx;
@@ -465,7 +467,7 @@ border-radius: 32rpx;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 8.34rpx;
+  top: 50rpx;
   z-index: 3;
 }
 .sign_in_box text{
@@ -474,7 +476,7 @@ border-radius: 32rpx;
 position: absolute;
 left: 50%;
 transform: translateX(-50%);
-top: 170rpx;
+top: 172rpx;
 
 font-family: 'Urbanist';
 font-style: normal;
@@ -489,7 +491,8 @@ z-index: 3;
 
 .sign_in_box{
 /* Rectangle 24 */
-
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 position: absolute;
 
 background: rgba(240, 242, 255, 0.02);

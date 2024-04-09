@@ -451,23 +451,27 @@
     }
     console.log(input_content.value);
     isDisplay.value = 'block';
-    
+    console.log(userStore.profile.openid);
     const user_id = 1;
     uni.request({
       url:`https://api.room402.temp.ziqiang.net.cn/reservation/?date=${current_y}-0${current_m}-${current_d}`,
       method:'POST',
-      headers: {'Authorization': userStore.profile.session},
+      header: {'Authorization': userStore.profile.openid,
+      'source-client':'miniapp',
+    },
       data:{
           theme:`${input_content.value}`,
           start_time:  `${year.value}-${month.value}-${day.value} ${time0_.value}`,
           end_time: `${year.value}-${month.value}-${day.value} ${time1_.value}`,
-          user:'1'
+          user:`${userStore.profile.user_id}`,
+          name:'张三',
+          student_id:2023302100001
           // user_id:'1',
           // date:`${year.value}-${month.value}-${day.value}`,
       },
       success:(res)=>{
         console.log(res.data);
-        console.log('成功');
+        console.log('调用成功');
       },
       fail:(fail)=>{
         console.log(fail.data);
@@ -715,9 +719,9 @@
 position: absolute;
 width: calc(147*2rpx);
 height: 44rpx;
-left: calc(178*2rpx);
+left: calc(160*2rpx);
 top: 828rpx;
-
+white-space: nowrap;
 font-family: 'Urbanist';
 font-style: normal;
 font-weight: 550;
@@ -1180,10 +1184,11 @@ flex-grow: 0;
 
 position: absolute;
 top: calc((193)*2rpx);
-left:calc((311 - 295)*2rpx);
-width: calc(295*2rpx);
-height: calc(146*2rpx);
 
+left:calc((311 - 295)*2rpx);
+min-width: calc(295*2rpx);
+height: calc(146*2rpx);
+width: fit-content;
 background: #FFFFFF;
 box-shadow: 0rpx 8rpx 8rpx rgba(0, 0, 0, 0.25);
 border-radius: 20rpx;

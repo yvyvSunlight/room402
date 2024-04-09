@@ -19,7 +19,7 @@ const httpInterceptor = {
         }
         //4.添加token请求头
         const userStore = useUserStore()
-        const token = userStore.profile?.token
+        const token = userStore.profile?.openid
         if(token){
             options.header.Authorization = token
         }

@@ -18,6 +18,7 @@
               url:'https://api.room402.temp.ziqiang.net.cn/wx/login',
               method:'GET',
               data:{
+                role:1,
                 code:params
               },
               success:(success)=>{
